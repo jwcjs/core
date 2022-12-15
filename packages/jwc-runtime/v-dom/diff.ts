@@ -31,19 +31,30 @@ export class VNode {
   }
 }
 
+/**
+ * Diff the old vnode and the new vnode.
+ * 
+ * 1. Mark the new vnode,
+ *   and mark the child nodes of the new vnode as new.
+ * 2. Diff the old vnode and the new vnode.
+ * 3. Update the dom tree.
+ * 
+ * @param oldVNode 
+ * @param newVNode
+ */
 export function diff(oldVNode: VNode, newVNode: VNode): VNode {
-  // mark the new vnode
   markNewVNode(newVNode);
-
-  // diff the old vnode and the new vnode
   diffRecursive(oldVNode, newVNode);
-
-  // update the dom tree
   update(newVNode);
-
   return newVNode;
 }
 
+/**
+ * Mark the new vnode,
+ * and mark the child nodes of the new vnode as new.
+ * 
+ * @param node the new vnode
+ */
 function markNewVNode(node: VNode) {
   if (node.isNew) {
     // For each child node of the node
@@ -53,6 +64,20 @@ function markNewVNode(node: VNode) {
   }
 }
 
+/**
+ * Diff the old vnode and the new vnode.
+ * 
+ * 1. If the old vnode is marked as deleted, then return. 
+ * 2. If the new vnode is marked as new, then return.
+ * 3. If the **tag name** of the old vnode and the new vnode are not equal,
+ *   then mark the old vnode as deleted, and mark the new vnode as new.
+ * 4. If the attributes of the old vnode and the new vnode are not equal,
+ *  then mark the new vnode as updated.
+ * 5. Diff the child nodes of the old vnode and the new vnode.
+ * 
+ * @param oldVNode 
+ * @param newVNode
+ */
 function diffRecursive(oldVNode: VNode, newVNode: VNode) {
   if (oldVNode.isDeleted) {
     return;
@@ -77,6 +102,16 @@ function diffRecursive(oldVNode: VNode, newVNode: VNode) {
   }
 }
 
+/**
+ * Update the dom tree.
+ * 
+ * 1. If the node is marked as deleted, then remove it from the dom tree.
+ * 2. If the node is marked as new, then create a new dom node.
+ * 3. If the node is marked as updated, then 
+ *    update the attributes of the dom node.
+ * 4. Update the child nodes of the dom node.
+ * 
+ */
 function update(node: VNode) {
   // if the node is marked as deleted, then remove it from the dom tree
   if (node.isDeleted) {
@@ -101,6 +136,15 @@ function update(node: VNode) {
   }
 }
 
+/**
+ * Create a dom node according to the tag name of the vnode.
+ * 
+ * 1. Create a dom node according to the tag name of the vnode.
+ * 2. Set the attributes of the dom node.
+ * 3. Create the child nodes of the dom node.
+ * 
+ * @param node the vnode
+ */
 function createElement(node: VNode): Node {
   // create a dom node according to the tag name of the vnode
   const el = document.createElement(node.tagName);
@@ -118,6 +162,16 @@ function createElement(node: VNode): Node {
   return el;
 }
 
+/**
+ * Update the attributes of the dom node.
+ * 
+ * 1. Get the dom node of the vnode.
+ * 2. Get the attributes of the vnode.
+ * 3. Update the attributes of the dom node.
+ * 4. Update the child nodes of the dom node.
+ * 
+ * @param node the vnode
+ */
 function updateElement(node: VNode) {
   // get the dom node of the vnode
   const el = node.el! as HTMLElement;
