@@ -16,7 +16,8 @@ export class VNode {
   constructor(
     tagName: string,
     attributes: { [key: string]: any },
-    children: VNode[]) {
+    children: VNode[]
+  ) {
     this.tagName = tagName;
     this.attributes = attributes;
     this.children = children;
@@ -42,11 +43,10 @@ export class VNode {
  * @param oldVNode 
  * @param newVNode
  */
-export function diff(oldVNode: VNode, newVNode: VNode): VNode {
+export function diff(oldVNode: VNode, newVNode: VNode) {
   markNewVNode(newVNode);
   diffRecursive(oldVNode, newVNode);
   update(newVNode);
-  return newVNode;
 }
 
 /**
