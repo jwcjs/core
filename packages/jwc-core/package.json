@@ -1,0 +1,21 @@
+{
+  "name": "@jwcjs/core",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "rollup": "^3.7.4",
+    "rollup-plugin-typescript2": "^0.34.1",
+    "vite": "^4.0.1"
+  },
+  "dependencies": {
+    "weakmap-polyfill": "^2.0.4"
+  }
+}
