@@ -50,6 +50,55 @@ export class JwcComponent extends HTMLElement implements JwcElement {
     })
   }
 
+  constructor() {
+    super();
+    this.host = this;
+    this.$options = (this.constructor as any).$options;
+    this.init();
+  }
+
+  /**
+   * init the styleSheets. 
+   * Put the styleSheets into the shadowRoot.
+   */
+  private initCSS(shadowRoot: ShadowRoot) {
+    if(adoptedStyleSheetsMap.has(this.constructor)) {
+      /**
+       * if the adoptedStyleSheetsMap has the constructor,
+       * it means that the styleSheets has been created.
+       */
+      shadowRoot.adoptedStyleSheets = adoptedStyleSheetsMap.get(this.constructor);
+    } else {
+      /**
+       * if the adoptedStyleSheetsMap doesn't have the constructor,
+       * it means that the styleSheets hasn't been created.
+       */
+      const styleSheets = this.$options.css;
+      if (styleSheets) {
+        const css = new CSSStyleSheet();
+        css.replaceSync(styleSheets);
+        shadowRoot.adoptedStyleSheets = [css];
+        adoptedStyleSheetsMap.set(this.constructor, [css]);
+      }
+    }
+    return shadowRoot;
+  }
+
+  private initShadowRoot() {
+    let shadowRoot: ShadowRoot = this.shadowRoot || this.attachShadow({ mode: 'open' });
+    shadowRoot = this.initCSS(this.shadowRoot);
+    if(this.css) {
+      shadowRoot.appendChild(createCSSElement(
+        typeof this.css === 'function' ? this.css() : this.css
+      ))
+    }
+    if (this.inlineStyles) {
+      this.customStyles = createCSSElement(this.inlineStyles);
+      shadowRoot.appendChild(this.customStyles);
+    }
+    return shadowRoot;
+  }
+
   private init() {
     this.props = this.getMetaList(COMPONENT_PROP_METADATA_KEY) || [];
     this.state = this.getMetaList(COMPONENT_STATE_METADATA_KEY) || [];
