@@ -83,7 +83,7 @@ function markNewVNode(node: VNode) {
  * @param newVNode
  */
 function diffRecursive(oldVNode: VNode, newVNode: VNode) {
-  if (oldVNode.isDeleted) {
+  if (oldVNode?.isDeleted) {
     return;
   }
   if (newVNode.isNew) {
@@ -91,7 +91,7 @@ function diffRecursive(oldVNode: VNode, newVNode: VNode) {
     return;
   }
 
-  if (oldVNode.tagName !== newVNode.tagName) {
+  if (oldVNode?.tagName !== newVNode.tagName) {
     oldVNode.isDeleted = true;
     newVNode.isNew = true;
     return;
@@ -135,7 +135,7 @@ function update(node: VNode) {
   }
 
   // update the child nodes of the dom node
-  for (const child of node.children) {
+  for (const child of Object.values(node.children)) {
     update(child);
   }
 }
@@ -159,8 +159,10 @@ function createElement(node: VNode): Node {
   }
 
   // create the child nodes of the dom node
-  for (const child of node.children) {
-    el.appendChild(createElement(child));
+  if (node.children) {
+    for (const child of node.children) {
+      el.appendChild(createElement(child));
+    }
   }
 
   return el;
