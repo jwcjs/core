@@ -30,18 +30,33 @@ importers:
 
   packages/jwc-core:
     specifiers:
+      '@jwcjs/reactively': workspace:^1.0.0
+      '@jwcjs/runtime': workspace:^1.0.0
       '@rollup/plugin-node-resolve': ^15.0.1
+      reflect-metadata: ^0.1.13
       rollup: ^3.7.4
       rollup-plugin-typescript2: ^0.34.1
       vite: ^4.0.1
       weakmap-polyfill: ^2.0.4
     dependencies:
+      '@jwcjs/reactively': link:../jwc-reactively
+      '@jwcjs/runtime': link:../jwc-runtime
+      reflect-metadata: 0.1.13
       weakmap-polyfill: 2.0.4
     devDependencies:
       '@rollup/plugin-node-resolve': 15.0.1_rollup@3.7.4
       rollup: 3.7.4
       rollup-plugin-typescript2: 0.34.1_rollup@3.7.4
       vite: 4.0.1
+
+  packages/jwc-reactively:
+    specifiers:
+      '@jwcjs/core': workspace:^1.0.0
+    dependencies:
+      '@jwcjs/core': link:../jwc-core
+
+  packages/jwc-runtime:
+    specifiers: {}
 
 packages:
 
@@ -1554,6 +1569,10 @@ packages:
   /queue-microtask/1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
     dev: true
+
+  /reflect-metadata/0.1.13:
+    resolution: {integrity: sha512-Ts1Y/anZELhSsjMcU605fU9RE4Oi3p5ORujwbIKXfWa+0Zxs510Qrmrce5/Jowq3cHSZSJqBjypxmHarc+vEWg==}
+    dev: false
 
   /regexpp/3.2.0:
     resolution: {integrity: sha512-pq2bWo9mVD43nbts2wGv17XLiNLya+GklZ8kaDLV2Z08gDCsGpnKn9BFMepvWuHCbyVvY7J5o5+BVvoQbmlJLg==}
