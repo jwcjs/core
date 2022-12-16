@@ -18,7 +18,6 @@
   "dependencies": {
     "@jwcjs/reactively": "workspace:^1.0.0",
     "@jwcjs/runtime": "workspace:^1.0.0",
-    "reflect-metadata": "^0.1.13",
-    "weakmap-polyfill": "^2.0.4"
+    "reflect-metadata": "^0.1.13"
   }
 }

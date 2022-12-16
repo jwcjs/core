@@ -37,12 +37,10 @@ importers:
       rollup: ^3.7.4
       rollup-plugin-typescript2: ^0.34.1
       vite: ^4.0.1
-      weakmap-polyfill: ^2.0.4
     dependencies:
       '@jwcjs/reactively': link:../jwc-reactively
       '@jwcjs/runtime': link:../jwc-runtime
       reflect-metadata: 0.1.13
-      weakmap-polyfill: 2.0.4
     devDependencies:
       '@rollup/plugin-node-resolve': 15.0.1_rollup@3.7.4
       rollup: 3.7.4
@@ -1874,11 +1872,6 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
-
-  /weakmap-polyfill/2.0.4:
-    resolution: {integrity: sha512-ZzxBf288iALJseijWelmECm/1x7ZwQn3sMYIkDr2VvZp7r6SEKuT8D0O9Wiq6L9Nl5mazrOMcmiZE/2NCenaxw==}
-    engines: {node: '>=8.10.0'}
-    dev: false
 
   /which/2.0.2:
     resolution: {integrity: sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==}
