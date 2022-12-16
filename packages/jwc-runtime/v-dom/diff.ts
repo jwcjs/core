@@ -50,7 +50,7 @@ export class VNode {
 export function diff(oldVNode: any, newVNode: any) {
   markNewVNode(newVNode);
   diffRecursive(oldVNode, newVNode);
-  update(newVNode);
+  update(oldVNode, newVNode);
 }
 
 /**
@@ -116,26 +116,26 @@ function diffRecursive(oldVNode: VNode, newVNode: VNode) {
  * 4. Update the child nodes of the dom node.
  * 
  */
-function update(node: VNode) {
+function update(oldNode: VNode, newNode: VNode) {
   // if the node is marked as deleted, then remove it from the dom tree
-  if (node.isDeleted) {
-    node.el!.parentNode!.removeChild(node.el!);
+  if (newNode.isDeleted) {
+    newNode.el!.parentNode!.removeChild(newNode.el!);
     return;
   }
 
   // if the node is marked as new, then create a new dom node
-  if (node.isNew) {
-    node.el = createElement(node);
+  if (newNode.isNew) {
+    newNode.el = createElement(newNode);
     return;
   }
 
   // if the node is marked as updated, then update the attributes of the dom node
-  if (node.isUpdated) {
-    updateElement(node);
+  if (newNode.isUpdated) {
+    updateElement(oldNode, newNode);
   }
 
   // update the child nodes of the dom node
-  for (const child of node.children) {
+  for (const child of newNode.children) {
     update(child);
   }
 }
@@ -155,7 +155,11 @@ function createElement(node: VNode): Node {
 
   // set the attributes of the dom node
   for (const key in node.attributes) {
-    el.setAttribute(key, node.attributes[key]);
+    if (key.startsWith("on")) {
+      el.addEventListener(key.slice(2).toLowerCase(), node.attributes[key]);
+    } else {
+      el.setAttribute(key, node.attributes[key]);
+    }
   }
 
   // create the child nodes of the dom node
@@ -176,18 +180,26 @@ function createElement(node: VNode): Node {
  * 
  * @param node the vnode
  */
-function updateElement(node: VNode) {
+function updateElement(oldNode: VNode, newNode: VNode) {
   // get the dom node of the vnode
-  const el = node.el! as HTMLElement;
+  const el = newNode.el! as HTMLElement;
   // get the attributes of the vnode
-  const attributes = node.attributes;
+  const attributes = newNode.attributes;
 
   // update the attributes of the dom node
   for (const key in attributes) {
-    el.setAttribute(key, attributes[key]);
+    if (key.startsWith("on")) {
+      if (typeof oldNode.attributes[key] === 'function') {
+        const eventName = key.slice(2).toLowerCase()
+        el.removeEventListener(eventName, oldNode.attributes[key])
+        el.addEventListener(eventName, attributes[key])
+      }
+    } else {
+      el.setAttribute(key, attributes[key]);
+    }
   }
 
-  for (const child of node.children) {
+  for (const child of newNode.children) {
     update(child);
   }
 }
