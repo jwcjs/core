@@ -4,7 +4,7 @@
 /out
 
 # 开发过程中产生的文件
-/node_modules
+**/node_modules
 /bower_components
 /jspm_packages
 /flow-typed
