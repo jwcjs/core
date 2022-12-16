@@ -24,6 +24,11 @@ export function defineProxy(target: any, propertyKey: string, value: any) {
     },
     set(newValue) {
       reactiveValue.value = newValue;
+      this.shouldUpdate = true;
+      // callback the new value to the watcher
+      this.watchersMap.get(propertyKey)?.forEach((watcher: any) => {
+        watcher.callback.call(this, newValue, value);
+      });
     },
   });
 }
