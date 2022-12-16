@@ -1,6 +1,5 @@
-import { createCSSElement } from "@jwcjs/reactively";
+import { createCSSElement, reactiveData, reactiveEvent } from "@jwcjs/reactively";
 import { diff } from "@jwcjs/runtime";
-import { reactiveData, reactiveEvent } from "packages/jwc-reactively/src/call-reactive";
 import { COMPONENT_PROP_METADATA_KEY, COMPONENT_STATE_METADATA_KEY } from "./constants/metas.constant";
 import { JwcElement, PropOptions } from "./types/jwc-element.interface";
 import { WatcherOptions } from "./types/watcher.interface";
@@ -164,7 +163,7 @@ export class JwcComponent extends HTMLElement implements JwcElement {
     const rendered = this.render(this.$data);
     this.rootNode = diff(null, rendered)
     if (this.$options.isMounted) {
-      this.rootNode.forEach((node: any) => {
+      this.rootNode?.forEach((node: any) => {
         shadowRoot.appendChild(node);
       })
     } else {
