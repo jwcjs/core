@@ -9,7 +9,7 @@ export interface CustomElementProps {
   /**
    * The component's styles.
    */
-  css?: CSSStyleSheet;
+  css?: any;
 
   /**
    * Options for the component.
