@@ -40,10 +40,14 @@ export class VNode {
  * 2. Diff the old vnode and the new vnode.
  * 3. Update the dom tree.
  * 
+ * Note:
+ * I can't get the type of the old vnode and the new vnode.
+ * So I use any to replace the type.
+ * 
  * @param oldVNode 
  * @param newVNode
  */
-export function diff(oldVNode: VNode, newVNode: VNode) {
+export function diff(oldVNode: any, newVNode: any) {
   markNewVNode(newVNode);
   diffRecursive(oldVNode, newVNode);
   update(newVNode);

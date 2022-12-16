@@ -1,7 +1,15 @@
+import { createCSSElement } from "@jwcjs/reactively";
+import { diff } from "@jwcjs/runtime";
 import { reactiveData, reactiveEvent } from "packages/jwc-reactively/src/call-reactive";
 import { COMPONENT_PROP_METADATA_KEY, COMPONENT_STATE_METADATA_KEY } from "./constants/metas.constant";
 import { JwcElement, PropOptions } from "./types/jwc-element.interface";
 import { WatcherOptions } from "./types/watcher.interface";
+
+/**
+ * The map of adoptedStyleSheets.
+ * It is used to avoid duplicate styleSheets.
+ */
+const adoptedStyleSheetsMap = new WeakMap();
 
 export class JwcComponent extends HTMLElement implements JwcElement {
   public override tagName: string;
@@ -15,13 +23,14 @@ export class JwcComponent extends HTMLElement implements JwcElement {
   public customStyles = null;
   public shouldUpdate = false;
   public props = {};
+  public propsList: PropOptions[] = [];
   public previousProps = {};
   public state = {};
   public previousState = {};
   public previousVNode = null;
 
   public host: HTMLElement;
-  public css: CSSStyleSheet;
+  public css: any;
 
   public override shadowRoot: ShadowRoot;
 
@@ -99,6 +108,25 @@ export class JwcComponent extends HTMLElement implements JwcElement {
     return shadowRoot;
   }
 
+  private attrsToProps() {
+    const host = this.shadowRoot && this.shadowRoot.host ? this.shadowRoot.host : this;
+    const attrs: Record<string, any> = {};
+    for (let i = 0; i < host.attributes.length; i++) {
+      const attr = host.attributes[i];
+      attrs[attr.name] = attr.value;
+    }
+    this.propsList.forEach((prop: PropOptions) => {
+      const { attr: name, default: defaultValue } = prop;
+      if (attrs[name]) {
+        this.previousProps[name] = attrs[name];
+        this.props[name] = attrs[name];
+      } else {
+        this.previousProps[name] = defaultValue;
+        this.props[name] = defaultValue;
+      }
+    });
+  }
+
   private init() {
     this.props = this.getMetaList(COMPONENT_PROP_METADATA_KEY) || [];
     this.state = this.getMetaList(COMPONENT_STATE_METADATA_KEY) || [];
@@ -108,12 +136,6 @@ export class JwcComponent extends HTMLElement implements JwcElement {
     this.initWatcher();
   }
 
-  constructor() {
-    super();
-    this.host = this;
-    this.$options = (this.constructor as any).$options;
-    this.init();
-  }
 
   get inlineStyles() {
     return super.getAttribute('style');
@@ -128,4 +150,28 @@ export class JwcComponent extends HTMLElement implements JwcElement {
 
     this.dispatchEvent(event);
   }
+
+  public connectedCallback() {
+    const shadowRoot = this.initShadowRoot();
+    this.attrsToProps();
+    /**
+     * beforeCreate -> 
+     * created -> 
+     * afterCreate -> 
+     * beforeMount -> 
+     * mounted
+     */
+    const rendered = this.render(this.$data);
+    this.rootNode = diff(null, rendered)
+    if (this.$options.isMounted) {
+      this.rootNode.forEach((node: any) => {
+        shadowRoot.appendChild(node);
+      })
+    } else {
+      this.rootNode && shadowRoot.appendChild(this.rootNode);
+    }
+    this.$lastRender = rendered;
+  }
+
+  public render(data: {}) {}
 }

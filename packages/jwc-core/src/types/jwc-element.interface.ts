@@ -15,6 +15,8 @@ export interface CustomElementProps {
    * Options for the component.
    */
   options?: ElementDefinitionOptions; // https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/define
+
+  isMounted?: boolean;
 }
 
 export interface PropOptions {
@@ -122,7 +124,7 @@ export interface JwcElement {
   /**
    * The component's render function.
    */
-  render?: (...args: any[]) => VNode;
+  render?(...args: any[]): any;
 }
 
 /**
