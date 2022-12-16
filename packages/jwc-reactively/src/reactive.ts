@@ -17,18 +17,3 @@ export function reactive<T extends Object>(target: T): T {
     }
   });
 }
-
-// Usage
-// const state = reactive({ count: 0 }, 'count');
-// state.count = 1;
-// console.log(state.count); // 1
-
-// Use in web component
-// class MyElement extends HTMLElement {
-//   constructor() {
-//     super();
-//     this.state = reactive({ count: 0 }, 'count');
-//     this.state.count = 1;
-//     console.log(this.state.count); // 1
-//   }
-// }
