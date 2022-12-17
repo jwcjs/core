@@ -145,7 +145,7 @@ export class JwcComponent extends HTMLElement implements JwcElement {
     return super.getAttribute('style');
   }
 
-  private updateDiff() {
+  public updateDiff() {
     const previous = this.$lastRender;
     const current = this.render(this.$data);
     if (previous) {
