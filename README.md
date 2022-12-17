@@ -6,6 +6,14 @@
 🧪 Working in Progress
 </pre>
 
+## TODO
+
+- [ ] Data Reactively
+- [ ] `<Fragment />` Support
+- [ ] Inject style
+- [ ] JSX TypeScript Support
+- [ ] Function Component Support
+
 ## Usage
 
 ```bash
