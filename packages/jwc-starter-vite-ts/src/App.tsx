@@ -1,7 +1,6 @@
 import { JwcComponent, Component, Prop, Event } from "@jwcjs/core";
 import { h } from "@jwcjs/runtime";
-// @ts-ignore In Vite4 
-import styles from './App.css?inline'
+import styles from './App.css?inline';
 
 @Component({
   name: "app-element",
