@@ -53,16 +53,20 @@ export function diff(oldVNode: any, newVNode: any, host?: Node) {
   }
   newVNode = diffRecursive(oldVNode, newVNode);
   const updated = update(oldVNode, newVNode);
-  console.log(updated, 'updated');
+
   if (host) {
     // transform the vnode to the dom tree
-    patch(host, updated, oldVNode);
+    if (updated.children instanceof Array) {
+      for (let index = 0; index < updated.children.length; index++) {
+        console.log(index, 'index1');
+        patch(host, updated.children[index], oldVNode.children[index], index);
+      }
+    }
   }
 }
 
-export function patch(host: Node, vnode: VNode, old: VNode) {
+export function patch(host: Node, vnode: VNode, old: VNode, index?: number) {
   if (vnode.isUpdated) {
-    console.log(vnode, 'vnode');
     // update the attributes of the dom node
     updateAttributes(vnode.el, vnode.attributes);
     // update the children of the dom node
@@ -70,7 +74,9 @@ export function patch(host: Node, vnode: VNode, old: VNode) {
     if (typeof vnode.children === 'string') {
       vnode.el.textContent = vnode.children;
     }
-    host.replaceChild(vnode.el, old.el);
+    console.log(createElement(vnode), 'vnode.el');
+    console.log(createElement(old), 'old');
+    host.replaceChild(createElement(vnode), createElement(old));
   } else if (vnode.isNew) {
     host.appendChild(vnode.el);
   } else if (vnode.isDeleted) {
@@ -79,11 +85,11 @@ export function patch(host: Node, vnode: VNode, old: VNode) {
 
   // update the children of the dom node
   if (vnode.children instanceof Array) {
-    for (const child of vnode.children) {
-      patch(vnode.el, child, old);
+    for (let index = 0; index < vnode.children.length; index++) {
+      patch(vnode.el, vnode.children[index], old.children[index], index);
     }
   }
-  
+
   return vnode;
 }
 
