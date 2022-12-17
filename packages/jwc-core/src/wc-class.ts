@@ -149,7 +149,7 @@ export class JwcComponent extends HTMLElement implements JwcElement {
     const previous = this.$lastRender;
     const current = this.render(this.$data);
     if (previous) {
-      diff(removeIsNew(previous), removeIsNew(current), this.rootNode);
+      diff(removeIsNew(previous), removeIsNew(current), this.shadowRoot);
     }
   }
 

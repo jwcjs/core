@@ -55,17 +55,17 @@ export function diff(oldVNode: any, newVNode: any, host?: Node) {
   const updated = update(oldVNode, newVNode);
 
   if (host) {
+    const hostel = host.childNodes[0].nodeName === 'STYLE' ? host.childNodes[1] : host.childNodes[0];
     // transform the vnode to the dom tree
     if (updated.children instanceof Array) {
       for (let index = 0; index < updated.children.length; index++) {
-        console.log(index, 'index1');
-        patch(host, updated.children[index], oldVNode.children[index], index);
+        patch(hostel.childNodes[index], updated.children[index], oldVNode.children[index], index);
       }
     }
   }
 }
 
-export function patch(host: Node, vnode: VNode, old: VNode, index?: number) {
+export function patch(host: Node, vnode: VNode, old: VNode, index: number) {
   if (vnode.isUpdated) {
     // update the attributes of the dom node
     updateAttributes(vnode.el, vnode.attributes);
@@ -74,23 +74,24 @@ export function patch(host: Node, vnode: VNode, old: VNode, index?: number) {
     if (typeof vnode.children === 'string') {
       vnode.el.textContent = vnode.children;
     }
-    console.log(createElement(vnode), 'vnode.el');
-    console.log(createElement(old), 'old');
-    host.replaceChild(createElement(vnode), createElement(old));
+    host.parentNode?.replaceChild(createElement(vnode), host);
   } else if (vnode.isNew) {
-    host.appendChild(vnode.el);
+    host.appendChild(createElement(vnode));
   } else if (vnode.isDeleted) {
-    host.removeChild(vnode.el);
+    host.removeChild(host.childNodes[index]);
   }
 
   // update the children of the dom node
   if (vnode.children instanceof Array) {
     for (let index = 0; index < vnode.children.length; index++) {
-      patch(vnode.el, vnode.children[index], old.children[index], index);
+      // find the dom node in the host node
+      const child = host.childNodes[index];
+      patch(child, vnode.children[index], old.children[index], index);
+      continue;
     }
   }
 
-  return vnode;
+  return;
 }
 
 export function updateAttributes(el: Node, attributes: { [key: string]: any }) {
