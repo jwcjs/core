@@ -1,5 +1,5 @@
 import { createCSSElement, defineProxy, reactiveData, reactiveEvent } from "@jwcjs/reactively";
-import { createElement, diff, removeIsNew, VNode } from "@jwcjs/runtime";
+import { createElement, diff, patch, removeIsNew, VNode } from "@jwcjs/runtime";
 import { COMPONENT_PROP_METADATA_KEY, COMPONENT_STATE_METADATA_KEY } from "./constants/metas.constant";
 import { JwcElement, PropOptions } from "./types/jwc-element.interface";
 import { WatcherOptions } from "./types/watcher.interface";
@@ -148,7 +148,9 @@ export class JwcComponent extends HTMLElement implements JwcElement {
   private updateDiff() {
     const previous = this.$lastRender;
     const current = this.render(this.$data);
-    previous && diff(removeIsNew(previous), removeIsNew(current));
+    if (previous) {
+      this.rootNode = diff(removeIsNew(previous), removeIsNew(current), this.rootNode);
+    }
   }
 
   public customEvent(name: string, detail: any) {

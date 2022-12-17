@@ -47,12 +47,56 @@ export class VNode {
  * @param oldVNode 
  * @param newVNode
  */
-export function diff(oldVNode: any, newVNode: any) {
+export function diff(oldVNode: any, newVNode: any, host?: Node) {
   if (!oldVNode) {
     markNewVNode(newVNode);
   }
   newVNode = diffRecursive(oldVNode, newVNode);
-  update(oldVNode, newVNode);
+  const updated = update(oldVNode, newVNode);
+  console.log(updated, 'updated');
+  if (host) {
+    // transform the vnode to the dom tree
+    patch(host, updated, oldVNode);
+  }
+}
+
+export function patch(host: Node, vnode: VNode, old: VNode) {
+  if (vnode.isUpdated) {
+    console.log(vnode, 'vnode');
+    // update the attributes of the dom node
+    updateAttributes(vnode.el, vnode.attributes);
+    // update the children of the dom node
+    // if the children is a string, update the textContent of the dom node
+    if (typeof vnode.children === 'string') {
+      vnode.el.textContent = vnode.children;
+    }
+    host.replaceChild(vnode.el, old.el);
+  } else if (vnode.isNew) {
+    host.appendChild(vnode.el);
+  } else if (vnode.isDeleted) {
+    host.removeChild(vnode.el);
+  }
+
+  // update the children of the dom node
+  if (vnode.children instanceof Array) {
+    for (const child of vnode.children) {
+      patch(vnode.el, child, old);
+    }
+  }
+  
+  return vnode;
+}
+
+export function updateAttributes(el: Node, attributes: { [key: string]: any }) {
+  for (const key in attributes) {
+    if (key === 'style') {
+      for (const styleKey in attributes[key]) {
+        (el as HTMLElement).style[styleKey] = attributes[key][styleKey];
+      }
+    } else {
+      (el as HTMLElement).setAttribute(key, attributes[key]);
+    }
+  }
 }
 
 /**
@@ -146,19 +190,23 @@ function update(oldNode: VNode | undefined, newNode: VNode) {
   // if the node is marked as deleted, then remove it from the dom tree
   if (newNode.isDeleted) {
     newNode.el!.parentNode!.removeChild(newNode.el!);
-    return;
+    return newNode;
   }
 
   // if the node is marked as new, then create a new dom node
   if (newNode.isNew) {
     console.log('create', newNode);
     newNode.el = createElement(newNode);
-    return;
+    return newNode;
   }
 
   // if the node is marked as updated, then update the attributes of the dom node
   if (newNode.isUpdated) {
-    updateElement(oldNode, newNode);
+    const updated = updateElement(oldNode, newNode);
+    if (updated) {
+      newNode.el = updated;
+    }
+    return newNode;
   }
 
   // update the child nodes of the dom node
@@ -167,6 +215,8 @@ function update(oldNode: VNode | undefined, newNode: VNode) {
       update(undefined, child);
     }
   }
+
+  return newNode;
 }
 
 /**
