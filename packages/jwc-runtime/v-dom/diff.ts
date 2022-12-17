@@ -116,7 +116,7 @@ function diffRecursive(oldVNode: VNode, newVNode: VNode) {
  * 4. Update the child nodes of the dom node.
  * 
  */
-function update(oldNode: VNode, newNode: VNode) {
+function update(oldNode: VNode | undefined, newNode: VNode) {
   // if the node is marked as deleted, then remove it from the dom tree
   if (newNode.isDeleted) {
     newNode.el!.parentNode!.removeChild(newNode.el!);
@@ -136,7 +136,7 @@ function update(oldNode: VNode, newNode: VNode) {
 
   // update the child nodes of the dom node
   for (const child of Object.values(newNode.children)) {
-    update(child);
+    update(undefined, child);
   }
 }
 
@@ -149,7 +149,7 @@ function update(oldNode: VNode, newNode: VNode) {
  * 
  * @param node the vnode
  */
-function createElement(node: VNode): Node {
+export function createElement(node: VNode): Node {
   // create a dom node according to the tag name of the vnode
   const el = document.createElement(node.tagName);
 
@@ -165,6 +165,10 @@ function createElement(node: VNode): Node {
   // create the child nodes of the dom node
   if (node.children) {
     for (const child of node.children) {
+      if (typeof child === 'string') {
+        el.appendChild(document.createTextNode(child));
+        continue;
+      }
       el.appendChild(createElement(child));
     }
   }
@@ -202,6 +206,6 @@ function updateElement(oldNode: VNode, newNode: VNode) {
   }
 
   for (const child of newNode.children) {
-    update(child);
+    update(undefined, child);
   }
 }

@@ -1,5 +1,5 @@
 import { createCSSElement, reactiveData, reactiveEvent } from "@jwcjs/reactively";
-import { diff } from "@jwcjs/runtime";
+import { createElement, diff } from "@jwcjs/runtime";
 import { COMPONENT_PROP_METADATA_KEY, COMPONENT_STATE_METADATA_KEY } from "./constants/metas.constant";
 import { JwcElement, PropOptions } from "./types/jwc-element.interface";
 import { WatcherOptions } from "./types/watcher.interface";
@@ -40,7 +40,7 @@ export class JwcComponent extends HTMLElement implements JwcElement {
   }
 
   private initWatcher() {
-    const watchers = this.getMetaList(COMPONENT_STATE_METADATA_KEY) || [] as WatcherOptions[];
+    const watchers = this.getMetaList(COMPONENT_PROP_METADATA_KEY) || [] as WatcherOptions[];
     watchers.forEach((watcher: WatcherOptions) => {
       const { callbackName } = watcher;
       const currentItem = this.watchersMap.get(callbackName)
@@ -161,15 +161,18 @@ export class JwcComponent extends HTMLElement implements JwcElement {
      * mounted
      */
     const rendered = this.render(this.$data);
-    this.rootNode = diff(null, rendered)
+    this.rootNode = createElement(rendered as any);
     if (this.$options.isMounted) {
-      this.rootNode?.forEach((node: any) => {
-        shadowRoot.appendChild(node);
-      })
-    } else {
       this.rootNode && shadowRoot.appendChild(this.rootNode);
     }
     this.$lastRender = rendered;
+  }
+
+  public attributeChangedCallback(name: string, oldValue: string, newValue: string) {
+    if (oldValue !== newValue) {
+      this.props[name] = newValue;
+    }
+    diff(this, this.$lastRender);
   }
 
   public render(data: {}) {}
