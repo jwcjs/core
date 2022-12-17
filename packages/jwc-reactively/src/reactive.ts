@@ -7,6 +7,8 @@
  * use the value in a template.
  */
 export function reactive<T extends Object>(target: T): T {
+  // console.log(target);
+  
   return new Proxy<T>(target, {
     get(target, key) {
       return Reflect.get(target, key);

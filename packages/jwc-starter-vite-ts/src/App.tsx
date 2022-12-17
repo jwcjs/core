@@ -15,9 +15,7 @@ export class App extends JwcComponent {
   @Prop({ default: 0, attr: "count" })
   public count: number = 0;
 
-  @Event("click")
-  public onClick() {
-    console.log("clicked");
+  public onClick = () =>{
     this.count++;
   }
 

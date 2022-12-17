@@ -24,7 +24,7 @@ export class VNode {
     this.isNew = true;
     this.isUpdated = false;
     this.isDeleted = false;
-    this.el = null;
+    this.el = document.createElement(tagName);
   }
 
   public static isVNode(vnode: any): vnode is VNode {
@@ -48,8 +48,10 @@ export class VNode {
  * @param newVNode
  */
 export function diff(oldVNode: any, newVNode: any) {
-  markNewVNode(newVNode);
-  diffRecursive(oldVNode, newVNode);
+  if (!oldVNode) {
+    markNewVNode(newVNode);
+  }
+  newVNode = diffRecursive(oldVNode, newVNode);
   update(oldVNode, newVNode);
 }
 
@@ -82,19 +84,29 @@ function markNewVNode(node: VNode) {
  * @param oldVNode 
  * @param newVNode
  */
-function diffRecursive(oldVNode: VNode, newVNode: VNode) {
+function diffRecursive(oldVNode: VNode, newVNode: VNode, host?: VNode) {
+  if (!oldVNode) return newVNode;
+  // just text node
+  if (typeof oldVNode === 'string' && typeof newVNode === 'string') {
+    if (oldVNode !== newVNode) {
+      newVNode = newVNode;
+      host!.isUpdated = true;
+    }
+  }
+
   if (oldVNode?.isDeleted) {
-    return;
+    return oldVNode;
   }
-  if (newVNode.isNew) {
-    // if the new vnode is new, then return;
-    return;
-  }
+
+  // if (newVNode.isNew) {
+  //   // if the new vnode is new, then return;
+  //   return newVNode;
+  // }
 
   if (oldVNode?.tagName !== newVNode.tagName) {
     oldVNode.isDeleted = true;
     newVNode.isNew = true;
-    return;
+
   }
 
   if (JSON.stringify(oldVNode.attributes) !== JSON.stringify(newVNode.attributes)) {
@@ -104,6 +116,20 @@ function diffRecursive(oldVNode: VNode, newVNode: VNode) {
      */
     newVNode.isUpdated = true;
   }
+
+  // diff the child nodes of the old vnode and the new vnode
+  if (oldVNode.children && newVNode.children) {
+    const oldChildren = Object.values(oldVNode.children);
+    const newChildren = Object.values(newVNode.children);
+    if (JSON.stringify(oldChildren) !== JSON.stringify(newChildren)) {
+      const maxLength = Math.max(oldChildren.length, newChildren.length);
+      for (let i = 0; i < maxLength; i++) {
+        newVNode.children[i] = diffRecursive(oldChildren[i], newChildren[i], newVNode);
+      }
+    }
+  }
+
+  return newVNode;
 }
 
 /**
@@ -125,6 +151,7 @@ function update(oldNode: VNode | undefined, newNode: VNode) {
 
   // if the node is marked as new, then create a new dom node
   if (newNode.isNew) {
+    console.log('create', newNode);
     newNode.el = createElement(newNode);
     return;
   }
@@ -135,8 +162,10 @@ function update(oldNode: VNode | undefined, newNode: VNode) {
   }
 
   // update the child nodes of the dom node
-  for (const child of Object.values(newNode.children)) {
-    update(undefined, child);
+  if (newNode.children) {
+    for (const child of Object.values(newNode.children)) {
+      update(undefined, child);
+    }
   }
 }
 
@@ -172,7 +201,6 @@ export function createElement(node: VNode): Node {
       el.appendChild(createElement(child));
     }
   }
-
   return el;
 }
 
@@ -189,13 +217,14 @@ export function createElement(node: VNode): Node {
 function updateElement(oldNode: VNode, newNode: VNode) {
   // get the dom node of the vnode
   const el = newNode.el! as HTMLElement;
+
   // get the attributes of the vnode
   const attributes = newNode.attributes;
 
   // update the attributes of the dom node
   for (const key in attributes) {
     if (key.startsWith("on")) {
-      if (typeof oldNode.attributes[key] === 'function') {
+      if (typeof oldNode?.attributes[key] === 'function') {
         const eventName = key.slice(2).toLowerCase()
         el.removeEventListener(eventName, oldNode.attributes[key])
         el.addEventListener(eventName, attributes[key])
@@ -206,6 +235,32 @@ function updateElement(oldNode: VNode, newNode: VNode) {
   }
 
   for (const child of newNode.children) {
-    update(undefined, child);
+    if (typeof child === 'string') {
+      el.appendChild(document.createTextNode(child));
+      continue;
+    }
+    el.appendChild(createElement(child));
   }
+
+
+  // update the child nodes of the dom node
+  if (newNode.children) {
+    for (const child of Object.values(newNode.children)) {
+      update(undefined, child);
+    }
+  }
+
+  return el;
+}
+
+export function removeIsNew(vnode: VNode) {
+  if (vnode.isNew) {
+    vnode.isNew = false;
+  }
+  if (vnode.children) {
+    vnode.children.forEach((child: VNode) => {
+      removeIsNew(child);
+    });
+  }
+  return vnode;
 }

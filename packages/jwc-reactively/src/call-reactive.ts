@@ -28,20 +28,17 @@ export function defineProxy(target: any, propertyKey: string, value: any) {
       this.watchersMap.get(propertyKey)?.forEach((watcher: any) => {
         watcher.callback.call(this, newValue, value);
       });
+      this.updateDiff();
     },
   });
 }
 
-export function reactiveData(data: ReactiveData) {
-  return function (target: any, propertyKey: string) {
-    const { attr } = data;
-    const { $data } = target;
-    const { [propertyKey]: value } = $data;
-    const reactiveValue = reactive(value);
-    $data[propertyKey] = reactiveValue;
-    defineProxy(target, propertyKey, value);
-    target[`$${attr}`][propertyKey] = reactiveValue;
-  };
+export function reactiveData(data: ReactiveData[]) {
+  for(let i = 0; i < Object.keys(data).length; i++) {
+    const item = data[i]
+    console.log(item, "item");
+    defineProxy(this, item.attr, item)
+  }
 }
 
 export function reactiveEvent() {
@@ -53,7 +50,7 @@ export function reactiveEvent() {
           const res = event.handler.call(this, ...args);
           this.customEvent(event.name, res);
         }
-      },    
+      },
     })
   })
 }
