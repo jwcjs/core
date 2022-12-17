@@ -1,5 +1,5 @@
-import { createCSSElement, reactiveData, reactiveEvent } from "@jwcjs/reactively";
-import { createElement, diff } from "@jwcjs/runtime";
+import { createCSSElement, defineProxy, reactiveData, reactiveEvent } from "@jwcjs/reactively";
+import { createElement, diff, patch, removeIsNew, VNode } from "@jwcjs/runtime";
 import { COMPONENT_PROP_METADATA_KEY, COMPONENT_STATE_METADATA_KEY } from "./constants/metas.constant";
 import { JwcElement, PropOptions } from "./types/jwc-element.interface";
 import { WatcherOptions } from "./types/watcher.interface";
@@ -43,12 +43,12 @@ export class JwcComponent extends HTMLElement implements JwcElement {
     watchers.forEach((watcher: WatcherOptions) => {
       const { callbackName } = watcher;
       const currentItem = this.watchersMap.get(callbackName)
-       /**
-         * if the callbackName is already exist,
-         * add the watcher to the array.
-         * 
-         * if not, create a new array and add the watcher to it.
-         */
+      /**
+        * if the callbackName is already exist,
+        * add the watcher to the array.
+        * 
+        * if not, create a new array and add the watcher to it.
+        */
       if (currentItem) {
         this.watchersMap.set(callbackName, [...currentItem, watcher]);
       } else {
@@ -69,7 +69,7 @@ export class JwcComponent extends HTMLElement implements JwcElement {
    * Put the styleSheets into the shadowRoot.
    */
   private initCSS(shadowRoot: ShadowRoot) {
-    if(adoptedStyleSheetsMap.has(this.constructor)) {
+    if (adoptedStyleSheetsMap.has(this.constructor)) {
       /**
        * if the adoptedStyleSheetsMap has the constructor,
        * it means that the styleSheets has been created.
@@ -94,7 +94,7 @@ export class JwcComponent extends HTMLElement implements JwcElement {
   private initShadowRoot() {
     let shadowRoot: ShadowRoot = this.shadowRoot || this.attachShadow({ mode: 'open' });
     shadowRoot = this.initCSS(this.shadowRoot);
-    if(this.$options.css) {
+    if (this.$options.css) {
       shadowRoot.appendChild(createCSSElement(this.$options.css))
     }
     if (this.inlineStyles) {
@@ -127,14 +127,30 @@ export class JwcComponent extends HTMLElement implements JwcElement {
     this.props = this.getMetaList(COMPONENT_PROP_METADATA_KEY) || [];
     this.state = this.getMetaList(COMPONENT_STATE_METADATA_KEY) || [];
     const propsList: PropOptions[] = Object.values(this.props);
-    reactiveData.call(this, propsList.concat(Object.values(this.state)));
-    reactiveEvent.call(this);
+    const that = this;
+    // define the default value of the props.
+    propsList.forEach((prop: PropOptions) => {
+      const { attr: name, default: defaultValue } = prop;
+      this.previousProps[name] = defaultValue;
+      this.props[name] = defaultValue;
+      defineProxy(that, name, prop);
+    });
+    // reactiveData.call(this, propsList.concat(Object.values(this.state)));
+    // reactiveEvent.call(this);
     this.initWatcher();
   }
 
 
   get inlineStyles() {
     return super.getAttribute('style');
+  }
+
+  public updateDiff() {
+    const previous = this.$lastRender;
+    const current = this.render(this.$data);
+    if (previous) {
+      diff(removeIsNew(previous), removeIsNew(current), this.shadowRoot);
+    }
   }
 
   public customEvent(name: string, detail: any) {
@@ -158,11 +174,12 @@ export class JwcComponent extends HTMLElement implements JwcElement {
      * mounted
      */
     const rendered = this.render(this.$data);
-    this.rootNode = createElement(rendered as any);
+    this.rootNode = createElement(removeIsNew(rendered) as any);
     if (this.$options.isMounted) {
       this.rootNode && shadowRoot.appendChild(this.rootNode);
     }
-    this.$lastRender = rendered;
+
+    this.$lastRender = removeIsNew(rendered);
   }
 
   public attributeChangedCallback(name: string, oldValue: string, newValue: string) {
@@ -172,5 +189,5 @@ export class JwcComponent extends HTMLElement implements JwcElement {
     diff(this, this.$lastRender);
   }
 
-  public render(data: {}) {}
+  public render(data: {}): any { }
 }
