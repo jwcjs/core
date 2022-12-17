@@ -29,7 +29,6 @@ export class JwcComponent extends HTMLElement implements JwcElement {
   public previousVNode = null;
 
   public host: HTMLElement;
-  public css: any;
 
   public override shadowRoot: ShadowRoot;
 
@@ -95,10 +94,8 @@ export class JwcComponent extends HTMLElement implements JwcElement {
   private initShadowRoot() {
     let shadowRoot: ShadowRoot = this.shadowRoot || this.attachShadow({ mode: 'open' });
     shadowRoot = this.initCSS(this.shadowRoot);
-    if(this.css) {
-      shadowRoot.appendChild(createCSSElement(
-        typeof this.css === 'function' ? this.css() : this.css
-      ))
+    if(this.$options.css) {
+      shadowRoot.appendChild(createCSSElement(this.$options.css))
     }
     if (this.inlineStyles) {
       this.customStyles = createCSSElement(this.inlineStyles);

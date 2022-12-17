@@ -1,10 +1,10 @@
 import { JwcComponent, Component, Prop, Event } from "@jwcjs/core";
 import { h } from "@jwcjs/runtime";
-import style from './App.css'
+import styles from './App.css?inline'
 
 @Component({
   name: "app-element",
-  css: style
+  css: styles
 })
 export class App extends JwcComponent {
   constructor() {
