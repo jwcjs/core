@@ -79,6 +79,7 @@ registerFunctionComponent("app-element", <App />);
   <tbody>
     <tr>
       <td align="center"><a href="https://iucky.cn"><img src="https://avatars.githubusercontent.com/u/62133302?v=4?s=100" width="100px;" alt="Wibus"/><br /><sub><b>Wibus</b></sub></a><br /><a href="https://github.com/jwcjs/core/commits?author=wibus-wee" title="Code">💻</a></td>
+      <td align="center"><a href="https://akr.moe"><img src="https://avatars.githubusercontent.com/u/85140972?v=4?s=100" width="100px;" alt="AkaraChen"/><br /><sub><b>AkaraChen</b></sub></a><br /><a href="https://github.com/jwcjs/core/commits?author=AkaraChen" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>
