@@ -12,15 +12,19 @@ import { updateDOM } from "./dom";
  * @param node the vnode
  */
 export function createElement(node: VNode): Node {
+
   // create a dom node according to the tag name of the vnode
-  const el = document.createElement(node.tagName);
+  const el = node.tagName === "Fragment" ? document.createDocumentFragment() : document.createElement(node.tagName);
 
   // set the attributes of the dom node
-  for (const key in node.attributes) {
+  const attributes = node.attributes;
+  for (const key in attributes) {
     if (key.startsWith("on")) {
-      el.addEventListener(key.slice(2).toLowerCase(), node.attributes[key]);
+      const eventName = key.slice(2).toLowerCase()
+      el.addEventListener(eventName, attributes[key])
     } else {
-      el.setAttribute(key, node.attributes[key]);
+      // @ts-ignore
+      node.tagName === "Fragment" ? null : el.setAttribute(camelToDash(key), attributes[key]);
     }
   }
 
