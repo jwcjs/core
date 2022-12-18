@@ -53,21 +53,20 @@ importers:
 
   packages/jwc-reactively:
     specifiers:
-      '@jwcjs/core': workspace:^1.0.0
+      jwcjs: workspace:*
     dependencies:
-      '@jwcjs/core': link:../jwc-core
+      jwcjs: link:../jwc-core
 
   packages/jwc-runtime:
     specifiers: {}
 
   packages/jwc-starter-vite-ts:
     specifiers:
-      '@jwcjs/core': workspace:^1.0.0
-      '@jwcjs/runtime': workspace:^1.0.0
+      jwcjs: '*'
       vite: ^4.0.1
+    dependencies:
+      jwcjs: link:../jwc-core
     devDependencies:
-      '@jwcjs/core': link:../jwc-core
-      '@jwcjs/runtime': link:../jwc-runtime
       vite: 4.0.1
 
 packages:
