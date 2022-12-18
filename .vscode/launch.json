@@ -4,8 +4,8 @@
     {
       "type": "chrome",
       "request": "launch",
-      "name": "针对 localhost 启动 Chrome",
-      "url": "http://localhost:5173",
+      "name": "127.0.0.1 Debugger",
+      "url": "http://127.0.0.1:5173",
       "webRoot": "${workspaceFolder}"
     }
   ]
