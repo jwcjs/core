@@ -9,6 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "jwc": "^1.0.4"
+    "jwcjs": "workspace:*"
   }
 }

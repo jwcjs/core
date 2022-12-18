@@ -13,6 +13,6 @@
     "vite": "^4.0.1"
   },
   "dependencies": {
-    "jwc": "^1.0.4"
+    "jwcjs": "*"
   }
 }
