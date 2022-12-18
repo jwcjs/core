@@ -7,6 +7,14 @@
   "commitConvention": "angular",
   "contributors": [
     {
+      "login": "wibus-wee",
+      "name": "Wibus",
+      "avatar_url": "https://avatars.githubusercontent.com/u/62133302?v=4",
+      "profile": "https://iucky.cn",
+      "contributions": [
+        "code"
+      ]
+    }, {
       "login": "AkaraChen",
       "name": "AkaraChen",
       "avatar_url": "https://avatars.githubusercontent.com/u/85140972?v=4",
