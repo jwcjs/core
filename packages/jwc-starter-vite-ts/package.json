@@ -10,8 +10,9 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@jwcjs/core": "workspace:^1.0.0",
-    "@jwcjs/runtime": "workspace:^1.0.0",
     "vite": "^4.0.1"
+  },
+  "dependencies": {
+    "jwc": "^1.0.4"
   }
 }

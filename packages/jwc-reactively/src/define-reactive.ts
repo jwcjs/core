@@ -1,5 +1,4 @@
-import { PropOptions, WatcherOptions } from "@jwcjs/core";
-import { COMPONENT_EVENT_METADATA_KEY, COMPONENT_PROP_METADATA_KEY } from "@jwcjs/core";
+import { PropOptions, WatcherOptions, COMPONENT_EVENT_METADATA_KEY, COMPONENT_PROP_METADATA_KEY } from "jwc";
 import { ReactiveEvent } from "./call-reactive";
 
 /**

@@ -1,4 +1,4 @@
-import { CustomElementProps, COMPONENT_EVENT_METADATA_KEY } from "@jwcjs/core";
+import { CustomElementProps, COMPONENT_EVENT_METADATA_KEY } from "jwc";
 import { reactive } from "./reactive";
 
 /**

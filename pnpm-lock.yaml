@@ -51,21 +51,20 @@ importers:
 
   packages/jwc-reactively:
     specifiers:
-      '@jwcjs/core': workspace:^1.0.0
+      jwc: ^1.0.4
     dependencies:
-      '@jwcjs/core': link:../jwc-core
+      jwc: 1.0.4
 
   packages/jwc-runtime:
     specifiers: {}
 
   packages/jwc-starter-vite-ts:
     specifiers:
-      '@jwcjs/core': workspace:^1.0.0
-      '@jwcjs/runtime': workspace:^1.0.0
+      jwc: ^1.0.4
       vite: ^4.0.1
+    dependencies:
+      jwc: 1.0.4
     devDependencies:
-      '@jwcjs/core': link:../jwc-core
-      '@jwcjs/runtime': link:../jwc-runtime
       vite: 4.0.1
 
 packages:
@@ -1247,6 +1246,10 @@ packages:
     optionalDependencies:
       graceful-fs: 4.2.10
     dev: true
+
+  /jwc/1.0.4:
+    resolution: {integrity: sha512-n3KKcWXcHrSGM3WfEdqgIn4vFc8uabDbKFduMJT8uchla0Ifdaz9mQ350Go5kl2b2UvRLR8sYbyPCLeCr5zOBg==}
+    dev: false
 
   /levn/0.4.1:
     resolution: {integrity: sha512-+bT2uH4E5LGE7h/n3evcS/sQlJXCpIp6ym8OWJ5eV6+67Dsql/LaaT7qJBAt2rzfoa/5QBGBhxDix1dMt2kQKQ==}

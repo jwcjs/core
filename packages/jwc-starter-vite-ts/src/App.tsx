@@ -1,5 +1,4 @@
-import { JwcComponent, Component, Prop } from "@jwcjs/core";
-import { h } from "@jwcjs/runtime";
+import { JwcComponent, Component, Prop, h } from "jwc";
 import styles from './App.css?inline';
 
 @Component({
