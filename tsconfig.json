@@ -22,7 +22,7 @@
       "pretty": true,
       "resolveJsonModule": true,
       "sourceMap": true,
-      "target": "ES5",
+      "target": "ES6",
       "useUnknownInCatchVariables": true,
       "baseUrl": ".",
       "paths": {
@@ -30,6 +30,7 @@
           "jwc":["./packages/jwc-core"],
           "@jwcjs/runtime":["./packages/jwc-runtime"],
           "@jwcjs/reactively":["./packages/jwc-reactively"],
-      }
-  }
+      },
+  },
+  "exclude": ["**/dist/**"]
 }

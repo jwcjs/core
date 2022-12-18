@@ -25,10 +25,10 @@ export function createElement(node: VNode): Node {
 			const eventName = key.slice(2).toLowerCase();
 			el.addEventListener(eventName, attributes[key]);
 		} else {
-			// @ts-ignore
 			node.tagName === "Fragment"
 				? null
-				: el.setAttribute(camelToDash(key), attributes[key]);
+				: // @ts-ignore
+				  el.setAttribute(camelToDash(key), attributes[key]);
 		}
 	}
 
