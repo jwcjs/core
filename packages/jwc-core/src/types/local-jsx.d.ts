@@ -788,15 +788,22 @@ export namespace BaseJSX {
     is?: string | undefined;
   }
 
+type HTMLAttributeAnchorTarget =
+  | '_self'
+  | '_blank'
+  | '_parent'
+  | '_top'
+  | (string & {});
+
   export interface AnchorHTMLAttributes<T> extends HTMLAttributes<T> {
     download?: any;
-    href?: string;
-    hrefLang?: string;
-    media?: string;
-    rel?: string;
-    target?: "_blank" | "_self" | "_parent" | "_top";
-    type?: "button" | "reset" | "submit";
-    referrePolicy?: ReferrerPolicy;
+    href?: string | undefined;
+    hrefLang?: string | undefined;
+    media?: string | undefined;
+    rel?: string | undefined;
+    target?: HTMLAttributeAnchorTarget | undefined;
+    type?: string | undefined;
+    referrePolicy?: ReferrerPolicy | undefined;
   }
 
   export interface IntrinsicElements {
