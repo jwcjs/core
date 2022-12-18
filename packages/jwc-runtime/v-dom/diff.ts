@@ -63,6 +63,8 @@ export function diff(oldVNode: any, newVNode: any, host?: Node) {
       }
     }
   }
+
+  return removeAttrs(updated, ["isUpdated", "isNew", "isDeleted"]);
 }
 
 export function patch(host: Node, vnode: VNode, old: VNode, index: number) {
@@ -310,14 +312,14 @@ function updateElement(oldNode: VNode, newNode: VNode) {
   return el;
 }
 
-export function removeIsNew(vnode: VNode) {
-  if (vnode.isNew) {
-    vnode.isNew = false;
+export function removeAttrs(vnode: VNode, attrs: string[] = ["isNew",]) {
+  for (const attr of attrs) {
+    vnode[attr] ? vnode[attr] = false : null;
   }
   if (vnode.children) {
-    vnode.children.forEach((child: VNode) => {
-      removeIsNew(child);
-    });
+    for (const child of Object.values(vnode.children)) {
+      removeAttrs(child, attrs);
+    }
   }
   return vnode;
 }

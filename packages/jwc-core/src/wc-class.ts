@@ -1,5 +1,5 @@
-import { createCSSElement, defineProxy, reactiveData, reactiveEvent } from "@jwcjs/reactively";
-import { createElement, diff, patch, removeIsNew, VNode } from "@jwcjs/runtime";
+import { createCSSElement, defineProxy } from "@jwcjs/reactively";
+import { createElement, diff, removeAttrs } from "@jwcjs/runtime";
 import { COMPONENT_PROP_METADATA_KEY, COMPONENT_STATE_METADATA_KEY } from "./constants/metas.constant";
 import { JwcElement, PropOptions } from "./types/jwc-element.interface";
 import { WatcherOptions } from "./types/watcher.interface";
@@ -149,7 +149,8 @@ export class JwcComponent extends HTMLElement implements JwcElement {
     const previous = this.$lastRender;
     const current = this.render(this.$data);
     if (previous) {
-      diff(removeIsNew(previous), removeIsNew(current), this.shadowRoot);
+      this.$lastRender = null
+      this.$lastRender = diff(removeAttrs(previous), removeAttrs(current), this.shadowRoot);
     }
   }
 
@@ -174,19 +175,24 @@ export class JwcComponent extends HTMLElement implements JwcElement {
      * mounted
      */
     const rendered = this.render(this.$data);
-    this.rootNode = createElement(removeIsNew(rendered) as any);
+    this.rootNode = createElement(removeAttrs(rendered) as any);
     if (this.$options.isMounted) {
       this.rootNode && shadowRoot.appendChild(this.rootNode);
     }
 
-    this.$lastRender = removeIsNew(rendered);
+    this.$lastRender = removeAttrs(rendered);
+  }
+
+  public disconnectedCallback() {
+    this.$options.isMounted = false;
+    this.rootNode && this.rootNode.remove();
   }
 
   public attributeChangedCallback(name: string, oldValue: string, newValue: string) {
     if (oldValue !== newValue) {
       this.props[name] = newValue;
     }
-    diff(this, this.$lastRender);
+    this.$lastRender = diff(this, this.$lastRender);
   }
 
   public render(data: {}): any { }

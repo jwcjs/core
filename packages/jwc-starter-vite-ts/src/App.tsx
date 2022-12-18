@@ -1,4 +1,4 @@
-import { JwcComponent, Component, Prop, Event } from "@jwcjs/core";
+import { JwcComponent, Component, Prop } from "@jwcjs/core";
 import { h } from "@jwcjs/runtime";
 import styles from './App.css?inline';
 
@@ -23,6 +23,21 @@ export class App extends JwcComponent {
     return window.matchMedia("(prefers-color-scheme: dark)").matches
       ? "dark"
       : "light";
+  }
+
+  public override connectedCallback() {
+    super.connectedCallback();
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
+      this.updateDiff();
+      console.log("change");
+    });
+  }
+
+  public override disconnectedCallback() {
+    super.disconnectedCallback();
+    window.matchMedia("(prefers-color-scheme: dark)").removeEventListener("change", (e) => {
+      this.updateDiff();
+    });
   }
 
   public override render() {
