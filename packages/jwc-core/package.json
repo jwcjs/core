@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rollup -c rollup.config.mjs"
   },
   "keywords": [],
   "author": "",
@@ -12,7 +12,9 @@
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^15.0.1",
     "csstype": "^3.1.1",
+    "esbuild": "^0.16.9",
     "rollup": "^3.7.4",
+    "rollup-plugin-esbuild": "^5.0.0",
     "rollup-plugin-typescript2": "^0.34.1",
     "vite": "^4.0.1"
   },
@@ -20,5 +22,8 @@
     "@jwcjs/reactively": "workspace:^1.0.0",
     "@jwcjs/runtime": "workspace:^1.0.0",
     "reflect-metadata": "^0.1.13"
+  },
+  "exports": {
+    ".": "./dist/index.js"
   }
 }
