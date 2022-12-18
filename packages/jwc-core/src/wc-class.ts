@@ -132,6 +132,7 @@ export class JwcComponent extends HTMLElement implements JwcElement {
     propsList.forEach((prop: PropOptions) => {
       const { attr: name, default: defaultValue } = prop;
       this.previousProps[name] = defaultValue;
+      // getAttribute
       this.props[name] = defaultValue;
       defineProxy(that, name, prop);
     });
@@ -174,6 +175,14 @@ export class JwcComponent extends HTMLElement implements JwcElement {
      * beforeMount -> 
      * mounted
      */
+    const propsList = this.props as PropOptions[];
+    const that = this;
+    propsList.forEach((prop: PropOptions) => {
+      const attr = shadowRoot.host.getAttribute(prop.attr);
+      if (attr) {
+        that[prop.attr] = attr;
+      }
+    });
     const rendered = this.render(this.$data);
     this.rootNode = createElement(removeAttrs(rendered) as any);
     if (this.$options.isMounted) {
