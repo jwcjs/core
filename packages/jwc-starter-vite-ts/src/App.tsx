@@ -52,7 +52,7 @@ export class App extends JwcComponent {
           </a>
         </div>
         <div class={"card"}>
-          <button onClick={this.onClick} part="button">
+          <button onClick={this.onClick}>
             count is {String(this.count)}
           </button>
         </div>

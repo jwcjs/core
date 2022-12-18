@@ -11,10 +11,10 @@
 After the following tasks are completed, we will publish `Release v0.1.0.alpha.0`
 
 - [x] Data Reactively
+- [x] Inject style
+- [x] JSX TypeScript Support
 - [ ] `<Fragment />` Support
 - [ ] Vite Fully Support
-- [x] Inject style
-- [ ] JSX TypeScript Support
 - [ ] Function Component Support
 
 ## Usage
