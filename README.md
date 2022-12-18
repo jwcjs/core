@@ -13,7 +13,7 @@ After the following tasks are completed, we will publish `Release v0.1.0.alpha.0
 - [x] Data Reactively
 - [x] Inject style
 - [x] JSX TypeScript Support
-- [ ] `<Fragment />` Support
+- [x] `<Fragment />` Support
 - [ ] Vite Fully Support
 - [ ] Function Component Support
 
@@ -66,6 +66,17 @@ export function App() {
 
 registerFunctionComponent("app-element", <App />);
 ```
+
+## Contributors
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 
 ## License
 
