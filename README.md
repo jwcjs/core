@@ -8,9 +8,12 @@
 
 ## TODO
 
-- [ ] Data Reactively
+After the following tasks are completed, we will publish `Release v0.1.0.alpha.0`
+
+- [x] Data Reactively
 - [ ] `<Fragment />` Support
-- [ ] Inject style
+- [ ] Vite Fully Support
+- [x] Inject style
 - [ ] JSX TypeScript Support
 - [ ] Function Component Support
 
