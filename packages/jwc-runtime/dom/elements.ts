@@ -1,4 +1,5 @@
 import { VNode } from "../v-dom";
+import { camelToDash } from "../utils/others";
 import { updateDOM } from "./dom";
 
 /**
@@ -62,7 +63,7 @@ export function updateElement(oldNode: VNode, newNode: VNode) {
         el.addEventListener(eventName, attributes[key])
       }
     } else {
-      el.setAttribute(key, attributes[key]);
+      el.setAttribute(camelToDash(key), attributes[key]);
     }
   }
 
