@@ -1,4 +1,4 @@
-import { JwcComponent, Component, Prop, h } from "jwcjs";
+import { JwcComponent, Component, Prop, h, Fragment } from "jwcjs";
 import styles from './App.css?inline';
 
 @Component({
@@ -41,7 +41,7 @@ export class App extends JwcComponent {
 
   public override render() {
     return (
-      <div>
+      <>
         <div>
           <a href="https://vitejs.dev" target="_blank">
             <img src="/vite.svg" class="logo" alt="Vite logo" />
@@ -58,7 +58,7 @@ export class App extends JwcComponent {
         <p class="read-the-docs">
           Click on the Vite and Jwc logos to learn more
         </p>
-      </div>
+      </>
     )
   }
 }
