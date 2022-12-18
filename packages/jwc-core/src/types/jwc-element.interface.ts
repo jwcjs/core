@@ -33,11 +33,6 @@ export interface PropOptions {
   required?: boolean;
 
   /**
-   * The type of the prop.
-   */
-  type?: "Prop" | "State";
-
-  /**
    * The prop's attribute name.
    */
   attr?: string;

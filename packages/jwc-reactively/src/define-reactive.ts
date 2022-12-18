@@ -5,10 +5,10 @@ import { ReactiveEvent } from "./call-reactive";
  * A universal function for defining props and state
  */
 function definePropsOrState(target: any, attr: string, options: PropOptions) {
-  const { default: v, required, type } = options;
+  const { default: v, required } = options;
   const keys = Reflect
     .getMetadata(
-      options.attr === "Prop" ? COMPONENT_PROP_METADATA_KEY : COMPONENT_PROP_METADATA_KEY,
+      COMPONENT_PROP_METADATA_KEY,
       target
     ) || [];
 
@@ -16,9 +16,12 @@ function definePropsOrState(target: any, attr: string, options: PropOptions) {
     attr,
     default: v,
     required,
-    type,
   });
-  Reflect.defineMetadata(COMPONENT_PROP_METADATA_KEY, keys, target);
+  Reflect.defineMetadata(
+    COMPONENT_PROP_METADATA_KEY,
+    keys,
+    target
+  );
 }
 
 /**

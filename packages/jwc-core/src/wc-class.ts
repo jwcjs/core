@@ -1,6 +1,6 @@
 import { createCSSElement, defineProxy } from "@jwcjs/reactively";
 import { createElement, diff, removeAttrs } from "@jwcjs/runtime";
-import { COMPONENT_PROP_METADATA_KEY, COMPONENT_STATE_METADATA_KEY } from "./constants/metas.constant";
+import { COMPONENT_PROP_METADATA_KEY } from "./constants/metas.constant";
 import { JwcElement, PropOptions } from "./types/jwc-element.interface";
 import { WatcherOptions } from "./types/watcher.interface";
 
@@ -24,8 +24,6 @@ export class JwcComponent extends HTMLElement implements JwcElement {
   public props = {};
   public propsList: PropOptions[] = [];
   public previousProps = {};
-  public state = {};
-  public previousState = {};
   public previousVNode = null;
 
   public host: HTMLElement;
@@ -125,7 +123,6 @@ export class JwcComponent extends HTMLElement implements JwcElement {
 
   private init() {
     this.props = this.getMetaList(COMPONENT_PROP_METADATA_KEY) || [];
-    this.state = this.getMetaList(COMPONENT_STATE_METADATA_KEY) || [];
     const propsList: PropOptions[] = Object.values(this.props);
     const that = this;
     // define the default value of the props.
@@ -136,8 +133,6 @@ export class JwcComponent extends HTMLElement implements JwcElement {
       this.props[name] = defaultValue;
       defineProxy(that, name, prop);
     });
-    // reactiveData.call(this, propsList.concat(Object.values(this.state)));
-    // reactiveEvent.call(this);
     this.initWatcher();
   }
 

@@ -1,4 +1,4 @@
-import { CustomElementProps, COMPONENT_EVENT_METADATA_KEY } from "jwcjs";
+import { CustomElementProps } from "jwcjs";
 import { reactive } from "./reactive";
 
 /**
@@ -6,9 +6,7 @@ import { reactive } from "./reactive";
  * 1. data
  * 2. event
  */
-export type ReactiveData = CustomElementProps & {
-  attr: "Prop" | "State";
-}
+export type ReactiveData = CustomElementProps
 
 export type ReactiveEvent = {
   name: any;
@@ -31,26 +29,4 @@ export function defineProxy(target: any, propertyKey: string, value: any) {
       this.updateDiff();
     },
   });
-}
-
-export function reactiveData(data: ReactiveData[]) {
-  for(let i = 0; i < Object.keys(data).length; i++) {
-    const item = data[i]
-    console.log(item, "item");
-    defineProxy(this, item.attr, item)
-  }
-}
-
-export function reactiveEvent() {
-  const getevents = this.getMetaList(COMPONENT_EVENT_METADATA_KEY) ?? [];
-  getevents.forEach((event: ReactiveEvent) => {
-    Object.defineProperty(this, event.name, {
-      get() {
-        return function (...args: any[]) {
-          const res = event.handler.call(this, ...args);
-          this.customEvent(event.name, res);
-        }
-      },
-    })
-  })
 }
