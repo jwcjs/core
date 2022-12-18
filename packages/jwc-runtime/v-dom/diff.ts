@@ -26,11 +26,22 @@ export function diff(oldVNode: any, newVNode: any, host?: Node) {
   const updated = updateDOM(oldVNode, newVNode);
 
   if (host) {
-    const hostel = host.childNodes[0].nodeName === 'STYLE' ? host.childNodes[1] : host.childNodes[0];
+    let hostel: Node[] = new Array();
+    if (host.childNodes[0].nodeName === 'STYLE') {
+      /**
+       * If the first child node of the host is a style node,
+       * then the style node is not a child node of the vnode.
+       * 
+       * So I need to remove the style node from the host.
+       */
+      host.childNodes.forEach((node: any) => {
+        if (node.nodeName !== 'STYLE') hostel.push(node);
+      });
+    }
     // transform the vnode to the dom tree
     if (updated.children instanceof Array) {
       for (let index = 0; index < updated.children.length; index++) {
-        patch(hostel.childNodes[index], updated.children[index], oldVNode.children[index], index);
+        patch(hostel[index], updated.children[index], oldVNode.children[index], index);
       }
     }
   }
