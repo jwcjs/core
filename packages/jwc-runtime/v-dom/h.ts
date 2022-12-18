@@ -1,4 +1,5 @@
-import { VNode } from './diff';
+import { VNode } from "./vnode";
+
 
 export function h(
   tag: string,

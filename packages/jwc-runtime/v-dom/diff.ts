@@ -1,36 +1,7 @@
-export class VNode {
-  tagName: string;
-  attributes: {
-    [key: string]: any;
-  }
-  children: VNode[];
-
-  // to assign status to the vnode
-  isNew: boolean;
-  isUpdated: boolean;
-  isDeleted: boolean;
-
-  // to record the dom node
-  el: Node | null;
-
-  constructor(
-    tagName: string,
-    attributes: { [key: string]: any },
-    children: VNode[]
-  ) {
-    this.tagName = tagName;
-    this.attributes = attributes;
-    this.children = children;
-    this.isNew = true;
-    this.isUpdated = false;
-    this.isDeleted = false;
-    this.el = document.createElement(tagName);
-  }
-
-  public static isVNode(vnode: any): vnode is VNode {
-    return vnode instanceof VNode;
-  }
-}
+import { updateDOM } from "../dom/dom";
+import { removeAttrs } from "../utils/attrs";
+import { patch } from "./patch";
+import { VNode } from "./vnode";
 
 /**
  * Diff the old vnode and the new vnode.
@@ -52,7 +23,7 @@ export function diff(oldVNode: any, newVNode: any, host?: Node) {
     markNewVNode(newVNode);
   }
   newVNode = diffRecursive(oldVNode, newVNode);
-  const updated = update(oldVNode, newVNode);
+  const updated = updateDOM(oldVNode, newVNode);
 
   if (host) {
     const hostel = host.childNodes[0].nodeName === 'STYLE' ? host.childNodes[1] : host.childNodes[0];
@@ -65,47 +36,6 @@ export function diff(oldVNode: any, newVNode: any, host?: Node) {
   }
 
   return removeAttrs(updated, ["isUpdated", "isNew", "isDeleted"]);
-}
-
-export function patch(host: Node, vnode: VNode, old: VNode, index: number) {
-  if (vnode.isUpdated) {
-    // update the attributes of the dom node
-    updateAttributes(vnode.el, vnode.attributes);
-    // update the children of the dom node
-    // if the children is a string, update the textContent of the dom node
-    if (typeof vnode.children === 'string') {
-      vnode.el.textContent = vnode.children;
-    }
-    host.parentNode?.replaceChild(createElement(vnode), host);
-  } else if (vnode.isNew) {
-    host.appendChild(createElement(vnode));
-  } else if (vnode.isDeleted) {
-    host.removeChild(host.childNodes[index]);
-  }
-
-  // update the children of the dom node
-  if (vnode.children instanceof Array) {
-    for (let index = 0; index < vnode.children.length; index++) {
-      // find the dom node in the host node
-      const child = host.childNodes[index];
-      patch(child, vnode.children[index], old.children[index], index);
-      continue;
-    }
-  }
-
-  return;
-}
-
-export function updateAttributes(el: Node, attributes: { [key: string]: any }) {
-  for (const key in attributes) {
-    if (key === 'style') {
-      for (const styleKey in attributes[key]) {
-        (el as HTMLElement).style[styleKey] = attributes[key][styleKey];
-      }
-    } else {
-      (el as HTMLElement).setAttribute(key, attributes[key]);
-    }
-  }
 }
 
 /**
@@ -183,143 +113,4 @@ function diffRecursive(oldVNode: VNode, newVNode: VNode, host?: VNode) {
   }
 
   return newVNode;
-}
-
-/**
- * Update the dom tree.
- * 
- * 1. If the node is marked as deleted, then remove it from the dom tree.
- * 2. If the node is marked as new, then create a new dom node.
- * 3. If the node is marked as updated, then 
- *    update the attributes of the dom node.
- * 4. Update the child nodes of the dom node.
- * 
- */
-function update(oldNode: VNode | undefined, newNode: VNode) {
-  // if the node is marked as deleted, then remove it from the dom tree
-  if (newNode.isDeleted) {
-    newNode.el!.parentNode!.removeChild(newNode.el!);
-    return newNode;
-  }
-
-  // if the node is marked as new, then create a new dom node
-  if (newNode.isNew) {
-    console.log('create', newNode);
-    newNode.el = createElement(newNode);
-    return newNode;
-  }
-
-  // if the node is marked as updated, then update the attributes of the dom node
-  if (newNode.isUpdated) {
-    const updated = updateElement(oldNode, newNode);
-    if (updated) {
-      newNode.el = updated;
-    }
-    return newNode;
-  }
-
-  // update the child nodes of the dom node
-  if (newNode.children) {
-    for (const child of Object.values(newNode.children)) {
-      update(undefined, child);
-    }
-  }
-
-  return newNode;
-}
-
-/**
- * Create a dom node according to the tag name of the vnode.
- * 
- * 1. Create a dom node according to the tag name of the vnode.
- * 2. Set the attributes of the dom node.
- * 3. Create the child nodes of the dom node.
- * 
- * @param node the vnode
- */
-export function createElement(node: VNode): Node {
-  // create a dom node according to the tag name of the vnode
-  const el = document.createElement(node.tagName);
-
-  // set the attributes of the dom node
-  for (const key in node.attributes) {
-    if (key.startsWith("on")) {
-      el.addEventListener(key.slice(2).toLowerCase(), node.attributes[key]);
-    } else {
-      el.setAttribute(key, node.attributes[key]);
-    }
-  }
-
-  // create the child nodes of the dom node
-  if (node.children) {
-    for (const child of node.children) {
-      if (typeof child === 'string') {
-        el.appendChild(document.createTextNode(child));
-        continue;
-      }
-      el.appendChild(createElement(child));
-    }
-  }
-  return el;
-}
-
-/**
- * Update the attributes of the dom node.
- * 
- * 1. Get the dom node of the vnode.
- * 2. Get the attributes of the vnode.
- * 3. Update the attributes of the dom node.
- * 4. Update the child nodes of the dom node.
- * 
- * @param node the vnode
- */
-function updateElement(oldNode: VNode, newNode: VNode) {
-  // get the dom node of the vnode
-  const el = newNode.el! as HTMLElement;
-
-  // get the attributes of the vnode
-  const attributes = newNode.attributes;
-
-  // update the attributes of the dom node
-  for (const key in attributes) {
-    if (key.startsWith("on")) {
-      if (typeof oldNode?.attributes[key] === 'function') {
-        const eventName = key.slice(2).toLowerCase()
-        el.removeEventListener(eventName, oldNode.attributes[key])
-        el.addEventListener(eventName, attributes[key])
-      }
-    } else {
-      el.setAttribute(key, attributes[key]);
-    }
-  }
-
-  for (const child of newNode.children) {
-    if (typeof child === 'string') {
-      el.appendChild(document.createTextNode(child));
-      continue;
-    }
-    el.appendChild(createElement(child));
-  }
-
-
-  // update the child nodes of the dom node
-  if (newNode.children) {
-    for (const child of Object.values(newNode.children)) {
-      update(undefined, child);
-    }
-  }
-
-  return el;
-}
-
-export function removeAttrs(vnode: VNode, attrs: string[] = ["isNew",]) {
-  for (const attr of attrs) {
-    vnode[attr] ? vnode[attr] = false : null;
-  }
-  if (vnode.children) {
-    for (const child of Object.values(vnode.children)) {
-      removeAttrs(child, attrs);
-    }
-  }
-  return vnode;
 }
