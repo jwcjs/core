@@ -1,4 +1,7 @@
 # @jwcjs/core 
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 🎨 Jwc.js is a JavaScript framework for using JSX to write web components on the web.
 
@@ -70,6 +73,20 @@ registerFunctionComponent("app-element", <App />);
 ## Contributors
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center"><a href="https://akr.moe"><img src="https://avatars.githubusercontent.com/u/85140972?v=4?s=100" width="100px;" alt="AkaraChen"/><br /><sub><b>AkaraChen</b></sub></a><br /><a href="https://github.com/jwcjs/core/commits?author=AkaraChen" title="Code">💻</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
 
