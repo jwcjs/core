@@ -1,2 +1,2 @@
-export * from '@jwcjs/runtime';
-export * from './src'
+export * from "@jwcjs/runtime";
+export * from "./src";

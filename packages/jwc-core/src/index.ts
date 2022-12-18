@@ -1,6 +1,6 @@
-import 'reflect-metadata';
+import "reflect-metadata";
 
-export * from './wc-class';
-export * from './types';
-export * from './decorators';
-export * from './constants';
+export * from "./wc-class";
+export * from "./types";
+export * from "./decorators";
+export * from "./constants";

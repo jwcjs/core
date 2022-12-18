@@ -2,7 +2,9 @@
   "name": "core",
   "author": "wibus-wee <wibus@qq.com>",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "lint": "eslint ./packages"
+  },
   "devDependencies": {
     "@types/node": "^18.11.17",
     "@typescript-eslint/eslint-plugin": "^5.46.1",

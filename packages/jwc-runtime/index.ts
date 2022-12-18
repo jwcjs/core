@@ -1,3 +1,3 @@
-export * from './v-dom';
-export * from './utils/attrs';
-export * from './dom';
+export * from "./v-dom";
+export * from "./utils/attrs";
+export * from "./dom";

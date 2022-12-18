@@ -1,1 +1,1 @@
-export * from './metas.constant'
+export * from "./metas.constant";
