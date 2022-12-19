@@ -3,12 +3,15 @@
   "version": "0.0.0",
   "description": "Jwc.js is a JavaScript framework for using JSX to write web components on the web.",
   "main": "./dist/index.js",
+  "exports": {
+    ".": "./dist/index.js"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/jwcjs/core"
   },
   "scripts": {
-    "build": "rollup -c rollup.config.mjs"
+    "build": "rimraf dist && rollup -c rollup.config.mjs"
   },
   "keywords": [
     "jsx",
@@ -31,8 +34,5 @@
     "@jwcjs/reactively": "workspace:^1.0.0",
     "@jwcjs/runtime": "workspace:^1.0.0",
     "reflect-metadata": "^0.1.13"
-  },
-  "exports": {
-    ".": "./dist/index.js"
   }
 }

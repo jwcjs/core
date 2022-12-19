@@ -32,7 +32,7 @@ importers:
       tslib: 2.4.1
       typescript: 4.9.4
 
-  packages/jwc-core:
+  packages/core:
     specifiers:
       '@jwcjs/reactively': workspace:^1.0.0
       '@jwcjs/runtime': workspace:^1.0.0
@@ -45,8 +45,8 @@ importers:
       rollup-plugin-typescript2: ^0.34.1
       vite: ^4.0.1
     dependencies:
-      '@jwcjs/reactively': link:../jwc-reactively
-      '@jwcjs/runtime': link:../jwc-runtime
+      '@jwcjs/reactively': link:../reactively
+      '@jwcjs/runtime': link:../runtime
       reflect-metadata: 0.1.13
     devDependencies:
       '@rollup/plugin-node-resolve': 15.0.1_rollup@3.7.4
@@ -57,21 +57,21 @@ importers:
       rollup-plugin-typescript2: 0.34.1_rollup@3.7.4
       vite: 4.0.1
 
-  packages/jwc-reactively:
+  packages/reactively:
     specifiers:
       jwcjs: workspace:*
     dependencies:
-      jwcjs: link:../jwc-core
+      jwcjs: link:../core
 
-  packages/jwc-runtime:
+  packages/runtime:
     specifiers: {}
 
-  packages/jwc-starter-vite-ts:
+  packages/starter-vite-ts:
     specifiers:
       jwcjs: '*'
       vite: ^4.0.1
     dependencies:
-      jwcjs: link:../jwc-core
+      jwcjs: link:../core
     devDependencies:
       vite: 4.0.1
 

@@ -10,7 +10,7 @@ export default defineConfig({
 	},
 	plugins: [
 		nodeResolve(),
-		typescript({ exclude: "../jwc-starter-vite-ts/**" }),
+		typescript({ exclude: "../starter-vite-ts/**" }),
 		minify(),
 	],
 });

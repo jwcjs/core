@@ -27,7 +27,7 @@
       "baseUrl": ".",
       "paths": {
           "@/*":["."],
-          "jwc":["packages/core"],
+          "jwcjs":["packages/core"],
           "@jwcjs/runtime":["packages/runtime"],
           "@jwcjs/reactively":["packages/reactively"],
       },
