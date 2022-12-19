@@ -1,6 +1,5 @@
 import "reflect-metadata";
 
 export * from "./wc-class";
-export * from "./types";
+export * from "shared";
 export * from "./decorators";
-export * from "./constants";

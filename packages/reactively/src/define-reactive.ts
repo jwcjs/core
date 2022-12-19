@@ -3,7 +3,7 @@ import {
 	WatcherOptions,
 	COMPONENT_EVENT_METADATA_KEY,
 	COMPONENT_PROP_METADATA_KEY,
-} from "jwcjs";
+} from "shared";
 import { ReactiveEvent } from "./call-reactive";
 
 /**

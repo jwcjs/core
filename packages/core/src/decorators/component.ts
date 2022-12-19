@@ -1,4 +1,4 @@
-import { CustomElementProps } from "../types";
+import { CustomElementProps } from "shared";
 
 export function Component(options: CustomElementProps) {
 	return function (_class: any) {

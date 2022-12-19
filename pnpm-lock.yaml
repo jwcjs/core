@@ -37,21 +37,21 @@ importers:
       '@jwcjs/reactively': workspace:^1.0.0
       '@jwcjs/runtime': workspace:^1.0.0
       '@rollup/plugin-node-resolve': ^15.0.1
-      csstype: ^3.1.1
       esbuild: ^0.16.9
       reflect-metadata: ^0.1.13
       rollup: ^3.7.4
       rollup-plugin-esbuild: ^5.0.0
       rollup-plugin-ts: ^3.0.2
+      shared: workspace:^1.0.0
       vite: ^4.0.1
     dependencies:
       '@jwcjs/reactively': link:../reactively
       '@jwcjs/runtime': link:../runtime
       reflect-metadata: 0.1.13
       rollup-plugin-ts: 3.0.2_rollup@3.7.4
+      shared: link:../shared
     devDependencies:
       '@rollup/plugin-node-resolve': 15.0.1_rollup@3.7.4
-      csstype: 3.1.1
       esbuild: 0.16.9
       rollup: 3.7.4
       rollup-plugin-esbuild: 5.0.0_izxe3qgshrdgvej6ppxwob7vay
@@ -79,12 +79,18 @@ importers:
 
   packages/reactively:
     specifiers:
-      jwcjs: workspace:*
+      shared: workspace:*
     dependencies:
-      jwcjs: link:../core
+      shared: link:../shared
 
   packages/runtime:
     specifiers: {}
+
+  packages/shared:
+    specifiers:
+      csstype: ^3.1.1
+    dependencies:
+      csstype: 3.1.1
 
 packages:
 
@@ -1212,7 +1218,7 @@ packages:
 
   /csstype/3.1.1:
     resolution: {integrity: sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==}
-    dev: true
+    dev: false
 
   /debug/4.3.4:
     resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}
