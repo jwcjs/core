@@ -6,65 +6,11 @@
 🧪 Working in Progress
 </pre>
 
-## TODO
-
-After the following tasks are completed, we will publish `Release v0.1.0.alpha.0`
-
-- [x] Data Reactively
-- [x] Inject style
-- [x] JSX TypeScript Support
-- [x] `<Fragment />` Support
-- [ ] Vite Fully Support
-- [ ] Function Component Support
 
 ## Usage
 
 ```bash
-npm i @jwcjs/core
-```
-
-### Class Component (Feature Preview)
-
-```tsx
-import { JwcComponent, Component } from "@jwcjs/core";
-import { h } from "@jwcjs/runtime";
-import style from './App.css'
-
-@Component({
-  name: "app-element",
-  css: style
-})
-export class App extends JwcComponent {
-
-  @Props()
-  hello: string
-
-  public override render() {
-    return (
-      <div>
-        <h1>Hello World</h1>
-        <span>{this.hello}</span>
-      </div>
-    )
-  }
-}
-```
-
-### Function Component (Feature Preview)
-
-```tsx
-import { registerFunctionComponent } from "@jwcjs/core";
-import style from './App.css'
-
-export function App() {
-  useStyle(style)
-  
-  const [hello, setHello] = useState<string>("Hi")
-  
-  return (<></>)
-}
-
-registerFunctionComponent("app-element", <App />);
+npm i jwcjs
 ```
 
 ## Contributors
