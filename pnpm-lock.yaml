@@ -86,15 +86,6 @@ importers:
   packages/runtime:
     specifiers: {}
 
-  packages/starter-vite-ts:
-    specifiers:
-      jwcjs: '*'
-      vite: ^4.0.1
-    dependencies:
-      jwcjs: link:../core
-    devDependencies:
-      vite: 4.0.1
-
 packages:
 
   /@ampproject/remapping/2.2.0:
