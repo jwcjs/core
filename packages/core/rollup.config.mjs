@@ -1,6 +1,6 @@
 import { defineConfig } from "rollup";
 import nodeResolve from "@rollup/plugin-node-resolve";
-import typescript from "rollup-plugin-typescript2";
+import typescript from "rollup-plugin-ts";
 import { minify } from "rollup-plugin-esbuild";
 
 export default defineConfig({
@@ -10,7 +10,10 @@ export default defineConfig({
 	},
 	plugins: [
 		nodeResolve(),
-		typescript({ exclude: "../starter-vite-ts/**" }),
+		typescript({
+			exclude: "../starter-vite-ts/**",
+			tsconfig: "../../tsconfig.json",
+		}),
 		minify(),
 	],
 });
