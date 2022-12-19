@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import minimist from "minimist";
 import prompts from "prompts";
-import { blue, cyan, green, red, reset } from "kolorist";
+import { cyan, green, red, reset } from "kolorist";
 import { fileURLToPath } from "node:url";
 
 const cwd = process.cwd();
