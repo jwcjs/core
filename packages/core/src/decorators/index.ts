@@ -1,5 +1,5 @@
 import { defineWatcher } from "packages/reactively";
-import { WatcherOptions } from "../types";
+import { WatcherOptions } from "shared";
 
 export * from "./props";
 export * from "./event";

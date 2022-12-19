@@ -1,8 +1,8 @@
 import { createCSSElement, defineProxy } from "packages/reactively";
 import { createElement, diff, removeAttrs } from "packages/runtime";
-import { COMPONENT_PROP_METADATA_KEY } from "./constants/metas.constant";
-import { JwcElement, PropOptions } from "./types/jwc-element.interface";
-import { WatcherOptions } from "./types/watcher.interface";
+import { COMPONENT_PROP_METADATA_KEY } from "../../shared/src/constants/metas.constant";
+import { JwcElement, PropOptions } from "shared";
+import { WatcherOptions } from "../../shared/src/types/watcher.interface";
 
 /**
  * The map of adoptedStyleSheets.
