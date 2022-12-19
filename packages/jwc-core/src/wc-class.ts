@@ -211,8 +211,10 @@ export class JwcComponent extends HTMLElement implements JwcElement {
 		if (oldValue !== newValue) {
 			this.props[name] = newValue;
 		}
-		this.$lastRender = diff(this, this.$lastRender);
+		this.updateDiff();
 	}
+
+	public adoptedCallback() {}
 
 	public render(data: {}): any {}
 }
