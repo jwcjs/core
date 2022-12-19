@@ -1,44 +1,28 @@
-# @jwcjs/core 
+<div align="center">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://user-images.githubusercontent.com/62133302/208357316-567ae5f8-782e-4e87-aab5-02b5d1c97aef.png" alt="Jwc" width="300" height="141">
+  </source>
+  <source media="(prefers-color-scheme: light)" srcset="https://user-images.githubusercontent.com/62133302/208357211-ae555dd9-b812-46b4-84d0-5d30bae30efa.png" alt="Jwc" width="300" height="141">
+  </source>
+  <img src="./packages/lit/logo.svg" alt="Lit" width="300" height="141">
+</picture>
 
-🎨 Jwc.js is a JavaScript framework for using JSX to write web components on the web.
+### Simple. JSX. Web Components.
 
-<pre align="center">
-🧪 Working in Progress
-</pre>
+[![Published on npm](https://img.shields.io/npm/v/jwcjs.svg?logo=npm)](https://www.npmjs.com/package/jwcjs)
 
+🎨 A JavaScript framework for using JSX to write web components on the web.
 
-## Usage
+</div>
 
-```bash
-npm i jwcjs
-```
+## Getting Started
 
-## Contributors
-
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-<table>
-  <tbody>
-    <tr>
-      <td align="center"><a href="https://iucky.cn"><img src="https://avatars.githubusercontent.com/u/62133302?v=4?s=100" width="100px;" alt="Wibus"/><br /><sub><b>Wibus</b></sub></a><br /><a href="https://github.com/jwcjs/core/commits?author=wibus-wee" title="Code">💻</a></td>
-      <td align="center"><a href="https://akr.moe"><img src="https://avatars.githubusercontent.com/u/85140972?v=4?s=100" width="100px;" alt="AkaraChen"/><br /><sub><b>AkaraChen</b></sub></a><br /><a href="https://github.com/jwcjs/core/commits?author=AkaraChen" title="Code">💻</a></td>
-    </tr>
-  </tbody>
-</table>
-
-<!-- markdownlint-restore -->
-<!-- prettier-ignore-end -->
-
-<!-- ALL-CONTRIBUTORS-LIST:END -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-
-<!-- markdownlint-restore -->
-<!-- prettier-ignore-end -->
-
-<!-- ALL-CONTRIBUTORS-LIST:END -->
+*Jwc.js is currently under development and we have not provided documentation for its use. When we have an alpha version ready for testing, we will post a link to the documentation here. Until then, contributors are welcome to help implement this project.*
 
 ## License
 
 [MIT](https://opensource.org/licenses/MIT)
+
+Made with ❤️ by Wibus and AkaraChen
+
+Copyright © 2022-PRESENT Jwc.js
