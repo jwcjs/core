@@ -1,11 +1,14 @@
 <div align="center">
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://user-images.githubusercontent.com/62133302/208357316-567ae5f8-782e-4e87-aab5-02b5d1c97aef.png" alt="Jwc" width="300" height="141">
-  </source>
-  <source media="(prefers-color-scheme: light)" srcset="https://user-images.githubusercontent.com/62133302/208357211-ae555dd9-b812-46b4-84d0-5d30bae30efa.png" alt="Jwc" width="300" height="141">
-  </source>
-  <img src="./packages/lit/logo.svg" alt="Lit" width="300" height="141">
-</picture>
+
+<a href="https://github.com/jwcjs/core#gh-light-mode-only">
+<img src="https://user-images.githubusercontent.com/62133302/208357211-ae555dd9-b812-46b4-84d0-5d30bae30efa.png" alt="Jwc" width="300" height="141"/>
+</a>
+  
+<a href="https://github.com/jwcjs/core#gh-dark-mode-only">
+<img src="https://user-images.githubusercontent.com/62133302/208357316-567ae5f8-782e-4e87-aab5-02b5d1c97aef.png" alt="Jwc" width="300" height="141"/>
+</a>
+  
+</div>
 
 ### Simple. JSX. Web Components.
 
