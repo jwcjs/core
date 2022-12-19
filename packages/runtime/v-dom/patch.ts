@@ -1,5 +1,6 @@
+import { createElement } from "../dom";
 import { updateAttributes } from "../dom/attrs";
-import { createElement } from "../dom/elements";
+
 import { VNode } from "./vnode";
 
 export function patch(host: Node, vnode: VNode, old: VNode, index: number) {
