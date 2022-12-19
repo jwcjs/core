@@ -1,14 +1,23 @@
 {
   "name": "jwcjs",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "0.0.0",
+  "description": "Jwc.js is a JavaScript framework for using JSX to write web components on the web.",
+  "main": "./dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jwcjs/core"
+  },
   "scripts": {
     "build": "rollup -c rollup.config.mjs"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "jsx",
+    "web components",
+    "framework",
+    "jwcjs"
+  ],
+  "author": "wibus-wee <wibus@qq.com>",
+  "license": "MIT",
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^15.0.1",
     "csstype": "^3.1.1",
