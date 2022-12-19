@@ -1,0 +1,1 @@
+const cwd = process.cwd()

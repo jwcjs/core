@@ -1,0 +1,21 @@
+{
+  "name": "create-jwc",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "jwcjs"
+  ],
+  "author": "JwcJS",
+  "license": "MIT",
+  "devDependencies": {
+    "cross-spawn": "^7.0.3",
+    "kolorist": "^1.6.0",
+    "minimist": "^1.2.7",
+    "prompts": "^2.4.2",
+    "unbuild": "^1.0.2"
+  }
+}
