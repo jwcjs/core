@@ -1,5 +1,5 @@
-import { createCSSElement, defineProxy } from "@jwcjs/reactively";
-import { createElement, diff, removeAttrs } from "@jwcjs/runtime";
+import { createCSSElement, defineProxy } from "packages/reactively";
+import { createElement, diff, removeAttrs } from "packages/runtime";
 import { COMPONENT_PROP_METADATA_KEY } from "./constants/metas.constant";
 import { JwcElement, PropOptions } from "./types/jwc-element.interface";
 import { WatcherOptions } from "./types/watcher.interface";

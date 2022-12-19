@@ -1,4 +1,4 @@
-import { VNode } from "@jwcjs/runtime";
+import { VNode } from "packages/runtime";
 
 export interface CustomElementProps {
 	/**

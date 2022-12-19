@@ -1,4 +1,4 @@
-import { defineWatcher } from "@jwcjs/reactively";
+import { defineWatcher } from "packages/reactively";
 import { WatcherOptions } from "../types";
 
 export * from "./props";

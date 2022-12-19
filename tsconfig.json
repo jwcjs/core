@@ -27,9 +27,9 @@
       "baseUrl": ".",
       "paths": {
           "@/*":["."],
-          "jwc":["./packages/jwc-core"],
-          "@jwcjs/runtime":["./packages/jwc-runtime"],
-          "@jwcjs/reactively":["./packages/jwc-reactively"],
+          "jwc":["packages/core"],
+          "@jwcjs/runtime":["packages/runtime"],
+          "@jwcjs/reactively":["packages/reactively"],
       },
   },
   "exclude": ["**/dist/**"]

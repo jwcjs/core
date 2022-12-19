@@ -3,7 +3,7 @@
 // Thanks to: DefinitelyTyped <https://github.com/DefinitelyTyped/DefinitelyTyped>
 //            ReactJS <http://facebook.github.io/react/>
 
-import { h } from "@jwcjs/runtime";
+import { h } from "packages/runtime";
 import * as CSS from "csstype";
 
 type Booleanish = boolean | "true" | "false";
