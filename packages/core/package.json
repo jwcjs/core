@@ -6,6 +6,9 @@
   "exports": {
     ".": "./dist/index.js"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/jwcjs/core"
@@ -19,7 +22,7 @@
     "framework",
     "jwcjs"
   ],
-  "author": "wibus-wee <wibus@qq.com>",
+  "author": "JwcJS",
   "license": "MIT",
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^15.0.1",
