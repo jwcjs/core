@@ -1,39 +1,24 @@
-# 编译生成的文件
 **/dist
 **/build
 **/out
-
-# 开发过程中产生的文件
 **/node_modules
 **/bower_components
 **/jspm_packages
 **/flow-typed
 **/coverage
-
-# 自动生成的文件和文件夹
 **/target
 **/.idea
 **/vendor
 **/tmp
-
-# 常见的日志文件
 **/*.log
 **/*.log.*
-
-# 常见的编辑器缓存文件
 **/*.swp
 **/*.swo
 **/*.swn
-
-# 常见的文档编辑软件产生的文件
 ~$*
 *.~
 *.bak
 *.tmp
-
-# OSX 系统文件
 **/.DS_Store
-
-# Windows 系统文件
 **/Thumbs.db
 **/Desktop.ini
