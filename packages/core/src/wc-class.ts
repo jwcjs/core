@@ -124,24 +124,24 @@ export class JwcComponent extends HTMLElement implements JwcElement {
 			const { attr: name, default: defaultValue } = prop;
 			if (attrs[name]) {
 				this.previousProps[name] = attrs[name];
-				this.props[name] = attrs[name];
+				this[name] = attrs[name];
 			} else {
 				this.previousProps[name] = defaultValue;
-				this.props[name] = defaultValue;
+				this[name] = defaultValue;
 			}
 		});
 	}
 
 	private init() {
 		this.props = this.getMetaList(COMPONENT_PROP_METADATA_KEY) || [];
-		const propsList: PropOptions[] = Object.values(this.props);
+		this.propsList = Object.values(this.props);
 		const that = this;
 		// define the default value of the props.
-		propsList.forEach((prop: PropOptions) => {
+		this.propsList.forEach((prop: PropOptions) => {
 			const { attr: name, default: defaultValue } = prop;
 			this.previousProps[name] = defaultValue;
 			// getAttribute
-			this.props[name] = defaultValue;
+			this[name] = defaultValue;
 			defineProxy(that, name, prop);
 		});
 		this.initWatcher();
@@ -201,10 +201,7 @@ export class JwcComponent extends HTMLElement implements JwcElement {
 		this.$lastRender = removeAttrs(rendered);
 	}
 
-	public disconnectedCallback() {
-		this.$options.isMounted = false;
-		this.rootNode && this.rootNode.remove();
-	}
+	public disconnectedCallback() {}
 
 	public attributeChangedCallback(
 		name: string,
