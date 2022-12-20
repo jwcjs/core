@@ -13,15 +13,14 @@
 
 [![Published on npm](https://img.shields.io/npm/v/jwcjs.svg?logo=npm)](https://www.npmjs.com/package/jwcjs)
   
-</div>
-
 🎨 A JavaScript framework for using JSX to write web components on the web.
 
 </div>
 
 ## Getting Started
 
-*Jwc.js is currently under development and we have not provided documentation for its use. When we have an alpha version ready for testing, we will post a link to the documentation here. Until then, contributors are welcome to help implement this project.*
+Follow the documentation at [jwc.js.org](https://jwc.js.org)!
+
 
 ## License
 
