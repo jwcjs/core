@@ -9,6 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "shared": "workspace:*"
+    "@jwcjs/shared": "workspace:*"
   }
 }

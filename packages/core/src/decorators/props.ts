@@ -1,5 +1,5 @@
-import { defineProps } from "packages/reactively";
-import { PropOptions } from "shared";
+import { defineProps } from "@jwcjs/reactively";
+import { PropOptions } from "@jwcjs/shared";
 
 export function Prop(options: PropOptions): PropertyDecorator {
 	return (target, key) => {

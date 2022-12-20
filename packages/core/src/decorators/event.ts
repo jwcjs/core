@@ -1,4 +1,4 @@
-import { defineEvent } from "packages/reactively";
+import { defineEvent } from "@jwcjs/reactively";
 
 export function Event(event: string): MethodDecorator {
 	return (target, key, descriptor) => {

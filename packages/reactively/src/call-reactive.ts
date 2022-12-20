@@ -1,4 +1,4 @@
-import { CustomElementProps } from "jwcjs";
+import { CustomElementProps } from "@jwcjs/shared";
 import { reactive } from "./reactive";
 
 /**
