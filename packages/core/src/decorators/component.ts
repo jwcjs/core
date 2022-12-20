@@ -1,4 +1,4 @@
-import { CustomElementProps } from "shared";
+import { CustomElementProps } from "@jwcjs/shared";
 
 export function Component(options: CustomElementProps) {
 	return function (_class: any) {

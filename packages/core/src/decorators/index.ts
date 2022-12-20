@@ -1,5 +1,5 @@
-import { defineWatcher } from "packages/reactively";
-import { WatcherOptions } from "shared";
+import { defineWatcher } from "@jwcjs/reactively";
+import { WatcherOptions } from "@jwcjs/shared";
 
 export * from "./props";
 export * from "./event";

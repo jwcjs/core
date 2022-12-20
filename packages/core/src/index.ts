@@ -1,5 +1,5 @@
 import "reflect-metadata";
 
 export * from "./wc-class";
-export * from "shared";
+export * from "@jwcjs/shared";
 export * from "./decorators";

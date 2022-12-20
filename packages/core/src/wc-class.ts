@@ -1,11 +1,11 @@
-import { createCSSElement, defineProxy } from "packages/reactively";
-import { createElement, diff, removeAttrs } from "packages/runtime";
+import { createCSSElement, defineProxy } from "@jwcjs/reactively";
+import { createElement, diff, removeAttrs } from "@jwcjs/runtime";
 import {
 	COMPONENT_PROP_METADATA_KEY,
 	JwcElement,
 	PropOptions,
 	WatcherOptions,
-} from "shared";
+} from "@jwcjs/shared";
 
 /**
  * The map of adoptedStyleSheets.

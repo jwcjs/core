@@ -24,13 +24,7 @@
       "sourceMap": true,
       "target": "ES6",
       "useUnknownInCatchVariables": true,
-      "baseUrl": ".",
-      "paths": {
-          "@/*":["."],
-          "jwcjs":["packages/core"],
-          "@jwcjs/runtime":["packages/runtime"],
-          "@jwcjs/reactively":["packages/reactively"],
-      },
+      "baseUrl": "."
   },
   "exclude": ["**/dist/**"]
 }

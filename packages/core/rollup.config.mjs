@@ -11,7 +11,6 @@ export default defineConfig({
 	plugins: [
 		nodeResolve(),
 		typescript({
-			exclude: "../starter-vite-ts/**",
 			tsconfig: "../../tsconfig.json",
 		}),
 		minify(),
