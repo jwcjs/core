@@ -23,6 +23,7 @@ type NativeWheelEvent = WheelEvent;
 export type CSSProperties = CSS.Properties<string | number>;
 
 declare global {
+	// eslint-disable-next-line @typescript-eslint/no-namespace
 	namespace JSX {
 		//
 		// Event System
