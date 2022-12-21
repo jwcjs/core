@@ -11,13 +11,21 @@
   },
   "types": "./dist/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "package.json",
+    "LICENSE"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/jwcjs/core"
+    "url": "git+https://github.com/jwcjs/core.git"
   },
+  "homepage": "https://jwc.js.org",
+  "bugs": {
+    "url": "https://github.com/jwcjs/core/issues"
+  },
+  "readme": "https://github.com/jwcjs/core#readme",
   "scripts": {
+    "prepublish": "npm run build",
     "build": "rimraf dist && rollup -c rollup.config.mjs"
   },
   "keywords": [
