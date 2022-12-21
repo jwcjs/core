@@ -1,11 +1,14 @@
 {
-  "name": "core",
+  "name": "@jwcjs/monorepo",
   "author": "wibus-wee <wibus@qq.com>",
   "license": "MIT",
   "scripts": {
-    "lint": "eslint ./packages"
+    "lint": "eslint ./packages",
+    "build:core": "cd packages/core && pnpm run build",
+    "bump": "bump -f packages/core"
   },
   "devDependencies": {
+    "@innei/bump-version": "^1.5.4",
     "@types/node": "^18.11.17",
     "@typescript-eslint/eslint-plugin": "^5.46.1",
     "@typescript-eslint/parser": "^5.46.1",
