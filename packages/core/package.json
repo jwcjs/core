@@ -47,5 +47,9 @@
     "@jwcjs/shared": "workspace:^1.0.0",
     "reflect-metadata": "^0.1.13",
     "rollup-plugin-ts": "^3.0.2"
+  },
+  "bump": {
+    "publish": true,
+    "changelog": true
   }
 }

@@ -1,7 +1,0 @@
-{
-  "leading": [],
-  "trailing": [],
-  "publish": false,
-  "changelog": true,
-  "allowed_branches": ["main"]
-}

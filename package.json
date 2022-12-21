@@ -5,7 +5,7 @@
   "scripts": {
     "lint": "eslint ./packages",
     "build:core": "cd packages/core && pnpm run build",
-    "release": "cd packages/core && pnpm exec vv"
+    "bump": "bump -f packages/core"
   },
   "devDependencies": {
     "@innei/bump-version": "^1.5.4",
