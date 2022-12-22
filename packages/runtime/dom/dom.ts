@@ -10,7 +10,14 @@ import { camelToDash } from "../utils/others";
  *
  * @param node the vnode
  */
-export function createElement(node: VNode): Node {
+export function createElement(node: VNode | VNode[]): Node {
+	if (Array.isArray(node)) {
+		const fragment = document.createDocumentFragment();
+		for (const child of node) {
+			fragment.appendChild(createElement(child));
+		}
+		return fragment;
+	}
 	// create a dom node according to the tag name of the vnode
 	const el =
 		node.tagName === "Fragment"
