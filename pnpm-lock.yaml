@@ -36,7 +36,7 @@ importers:
 
   demo:
     specifiers:
-      jwcjs: '*'
+      jwcjs: workspace:*
       vite: ^4.0.1
     devDependencies:
       jwcjs: link:../packages/core

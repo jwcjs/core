@@ -67,9 +67,13 @@ export class App extends JwcComponent {
 						count is {String(this.count)}
 					</button>
 				</div>
-				<p class="read-the-docs">
-					Click on the Vite and Jwc logos to learn more
-				</p>
+				{Array.from({ length: 2 }).map((_, i) => (
+					<>
+						<p class="read-the-docs">
+							Click on the Vite and Jwc logos to learn more
+						</p>
+					</>
+				))}
 			</>
 		);
 	}

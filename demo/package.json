@@ -13,6 +13,6 @@
   "license": "ISC",
   "devDependencies": {
     "vite": "^4.0.1",
-    "jwcjs": "*"
+    "jwcjs": "workspace:*"
   }
 }
