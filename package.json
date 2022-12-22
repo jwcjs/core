@@ -1,7 +1,7 @@
 {
   "name": "@jwcjs/monorepo",
   "author": "wibus-wee <wibus@qq.com>",
-  "version": "0.0.0",
+  "version": "0.1.0-alpha.0",
   "license": "MIT",
   "scripts": {
     "lint": "eslint ./packages",
@@ -25,7 +25,9 @@
     "typescript": "^4.9.4"
   },
   "bump": {
-    "activePackages": ["core"],
+    "activePackages": [
+      "core"
+    ],
     "publish": true,
     "message": "release: %s"
   }

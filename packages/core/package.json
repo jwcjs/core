@@ -1,6 +1,6 @@
 {
   "name": "jwcjs",
-  "version": "0.0.0",
+  "version": "0.1.0-alpha.0",
   "description": "Jwc.js is a JavaScript framework for using JSX to write web components on the web.",
   "main": "./dist/index.js",
   "exports": {
