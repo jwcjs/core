@@ -1,17 +1,18 @@
 {
   "name": "@jwcjs/monorepo",
   "author": "wibus-wee <wibus@qq.com>",
+  "version": "0.0.0",
   "license": "MIT",
   "scripts": {
     "lint": "eslint ./packages",
     "build:core": "cd packages/core && pnpm run build",
-    "bump": "bump -f packages/core"
+    "bump": "bump-monorepo"
   },
   "devDependencies": {
-    "@innei/bump-version": "^1.5.4",
     "@types/node": "^18.11.17",
     "@typescript-eslint/eslint-plugin": "^5.46.1",
     "@typescript-eslint/parser": "^5.46.1",
+    "@wibus/bump-monorepo": "1.0.0-alpha.2",
     "eslint": "^8.29.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
@@ -22,5 +23,10 @@
     "rimraf": "^3.0.2",
     "tslib": "^2.4.1",
     "typescript": "^4.9.4"
+  },
+  "bump": {
+    "activePackages": ["core"],
+    "publish": true,
+    "message": "release: %s"
   }
 }
