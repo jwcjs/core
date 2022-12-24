@@ -29,3 +29,4 @@ Follow the documentation at [jwc.js.org](https://jwc.js.org)!
 Made with ❤️ by Wibus and AkaraChen
 
 Copyright © 2022-PRESENT Jwc.js
+
