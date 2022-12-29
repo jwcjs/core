@@ -21,6 +21,8 @@
 
 Follow the documentation at [jwc.js.org](https://jwc.js.org)!
 
+> _**This project is still under development, so use it with caution in production**_
+
 
 ## License
 
