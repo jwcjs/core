@@ -15,7 +15,7 @@ importers:
       lint-staged: ^13.1.0
       pnpm: ^7.18.2
       prettier: ^2.8.1
-      rimraf: ^3.0.2
+      rimraf: ^4.0.0
       tslib: ^2.4.1
       typescript: ^4.9.4
     devDependencies:
@@ -30,7 +30,7 @@ importers:
       lint-staged: 13.1.0
       pnpm: 7.18.2
       prettier: 2.8.1
-      rimraf: 3.0.2
+      rimraf: 4.0.4
       tslib: 2.4.1
       typescript: 4.9.4
 
@@ -2557,6 +2557,12 @@ packages:
     hasBin: true
     dependencies:
       glob: 7.2.3
+    dev: true
+
+  /rimraf/4.0.4:
+    resolution: {integrity: sha512-R0hoVr9xTwemarQjoWlNt/nb5dEGVTBhVdkRmEX2zEkT8T6onH0XKiGjuaC7rNNj/gYzY2p4NVRJ3sjO1ascHQ==}
+    engines: {node: '>=14'}
+    hasBin: true
     dev: true
 
   /rollup-plugin-esbuild/5.0.0_izxe3qgshrdgvej6ppxwob7vay:
