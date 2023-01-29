@@ -27,14 +27,20 @@ export function createElement(node: VNode | VNode[]): Node {
 	// set the attributes of the dom node
 	const attributes = node.attributes;
 	for (const key in attributes) {
+		const value = attributes[key];
 		if (key.startsWith("on")) {
 			const eventName = key.slice(2).toLowerCase();
-			el.addEventListener(eventName, attributes[key]);
+			el.addEventListener(eventName, value);
+		}
+		if (key === "style") {
+			for (const styleKey of value) {
+				const styleValue = value[styleKey];
+				(el as HTMLElement).style[styleKey] = styleValue;
+			}
 		} else {
-			node.tagName === "Fragment"
-				? null
-				: // @ts-ignore
-				  el.setAttribute(camelToDash(key), attributes[key]);
+			if (!(node.tagName === "Fragment")) {
+				(el as HTMLElement).setAttribute(camelToDash(key), value);
+			}
 		}
 	}
 
