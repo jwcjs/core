@@ -1,37 +1,37 @@
 {
-	"name": "@jwcjs/monorepo",
-	"author": "wibus-wee <wibus@qq.com>",
-	"version": "0.1.0-alpha.0",
-	"license": "MIT",
-	"private": true,
-	"scripts": {
-		"lint": "eslint ./packages",
-		"build:core": "pnpm -C packages/core run build",
-		"build-packages": "npm run build:core",
-		"bump": "bump-monorepo",
-		"prepare": "npm run build-packages"
-	},
-	"devDependencies": {
-		"@types/node": "^18.11.17",
-		"@typescript-eslint/eslint-plugin": "^5.46.1",
-		"@typescript-eslint/parser": "^5.46.1",
-		"@wibus/bump-monorepo": "1.0.0-alpha.2",
-		"eslint": "^8.29.0",
-		"eslint-config-prettier": "^8.5.0",
-		"eslint-plugin-prettier": "^4.2.1",
-		"husky": "^8.0.2",
-		"lint-staged": "^13.1.0",
-		"pnpm": "^7.18.2",
-		"prettier": "^2.8.1",
-		"rimraf": "^4.0.0",
-		"tslib": "^2.4.1",
-		"typescript": "^4.9.4"
-	},
-	"bump": {
-		"activePackages": [
-			"core"
-		],
-		"publish": true,
-		"message": "release: %s"
-	}
+  "name": "@jwcjs/monorepo",
+  "author": "wibus-wee <wibus@qq.com>",
+  "version": "0.1.0-alpha.1",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "lint": "eslint ./packages",
+    "build:core": "pnpm -C packages/core run build",
+    "build-packages": "npm run build:core",
+    "bump": "bump-monorepo",
+    "prepare": "npm run build-packages"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.17",
+    "@typescript-eslint/eslint-plugin": "^5.46.1",
+    "@typescript-eslint/parser": "^5.46.1",
+    "@wibus/bump-monorepo": "1.0.0-alpha.2",
+    "eslint": "^8.29.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.2",
+    "lint-staged": "^13.1.0",
+    "pnpm": "^7.18.2",
+    "prettier": "^2.8.1",
+    "rimraf": "^4.0.0",
+    "tslib": "^2.4.1",
+    "typescript": "^4.9.4"
+  },
+  "bump": {
+    "activePackages": [
+      "core"
+    ],
+    "publish": true,
+    "message": "release: %s"
+  }
 }

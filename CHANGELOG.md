@@ -1,6 +1,22 @@
 # CHANGELOG
 
-# 0.1.0-alpha.0 (2022-12-22)
+# [0.1.0-alpha.1](https://github.com/jwcjs/core/compare/0.1.0-alpha.0...0.1.0-alpha.1) (2023-01-29)
+
+
+### Bug Fixes
+
+* **core:** missing checking vnode type in creating, fixed [#19](https://github.com/jwcjs/core/issues/19) ([#20](https://github.com/jwcjs/core/issues/20)) ([6e25dc9](https://github.com/jwcjs/core/commit/6e25dc91606c56348d6339d23b09a0df5d086a64))
+* root package, init before build packages ([#21](https://github.com/jwcjs/core/issues/21)) ([a90296f](https://github.com/jwcjs/core/commit/a90296f7bb7d725991dfac37e835368eeb27b877))
+* style attribute ([#25](https://github.com/jwcjs/core/issues/25)) ([21c27a3](https://github.com/jwcjs/core/commit/21c27a3b514c2a96d64bdd2db65638dabb9bdbd1))
+
+
+### Performance Improvements
+
+* **core:** export all packages in root ([98995ee](https://github.com/jwcjs/core/commit/98995ee8b250cb58d60295d4f05f714d4db6d910))
+
+
+
+# [0.1.0-alpha.0](https://github.com/jwcjs/core/compare/3aac67f35915f92e2a3a27b16a014dacaa662caa...0.1.0-alpha.0) (2022-12-22)
 
 
 ### Bug Fixes
