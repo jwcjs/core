@@ -4,6 +4,7 @@ import { updateAttributes } from "../dom/attrs";
 import { VNode } from "./vnode";
 
 export function patch(host: Node, vnode: VNode, old: VNode, index: number) {
+	// console.log("patch", host, vnode, old, index);
 	if (vnode.isUpdated) {
 		// update the attributes of the dom node
 		updateAttributes(vnode.el, vnode.attributes);
@@ -28,6 +29,5 @@ export function patch(host: Node, vnode: VNode, old: VNode, index: number) {
 			continue;
 		}
 	}
-
 	return;
 }

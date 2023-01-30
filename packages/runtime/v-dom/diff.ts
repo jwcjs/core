@@ -20,7 +20,7 @@ import { VNode } from "./vnode";
  */
 export function diff(oldVNode: any, newVNode: any, host?: Node) {
 	if (!oldVNode) {
-		markNewVNode(newVNode);
+		newVNode = markNewVNode(newVNode);
 	}
 	newVNode = diffRecursive(oldVNode, newVNode);
 	const updated = updateDOM(oldVNode, newVNode);
@@ -67,6 +67,8 @@ function markNewVNode(node: VNode) {
 			markNewVNode(child);
 		}
 	}
+	node?.isNew === false && (node.isNew = true);
+	return node;
 }
 
 /**
@@ -83,8 +85,22 @@ function markNewVNode(node: VNode) {
  * @param oldVNode
  * @param newVNode
  */
-function diffRecursive(oldVNode: VNode, newVNode: VNode, host?: VNode) {
-	if (!oldVNode) return newVNode;
+function diffRecursive(
+	oldVNode: VNode | undefined,
+	newVNode: VNode,
+	host?: VNode
+) {
+	if (!oldVNode) {
+		return markNewVNode(newVNode);
+	}
+	// the type of the vnode may be VNode[] ( x.map(() => (<></>)) )
+	if (oldVNode instanceof Array && newVNode instanceof Array) {
+		const maxLength = Math.max(oldVNode.length, newVNode.length);
+		for (let i = 0; i < maxLength; i++) {
+			newVNode[i] = diffRecursive(oldVNode[i], newVNode[i], host);
+		}
+		return newVNode;
+	}
 	// just text node
 	if (typeof oldVNode === "string" && typeof newVNode === "string") {
 		if (oldVNode !== newVNode) {
@@ -93,7 +109,7 @@ function diffRecursive(oldVNode: VNode, newVNode: VNode, host?: VNode) {
 		}
 	}
 
-	if (oldVNode?.isDeleted) {
+	if (oldVNode.isDeleted) {
 		return oldVNode;
 	}
 
@@ -117,7 +133,7 @@ function diffRecursive(oldVNode: VNode, newVNode: VNode, host?: VNode) {
 		 */
 		newVNode.isUpdated = true;
 	}
-
+	// console.log(newVNode, oldVNode);
 	// diff the child nodes of the old vnode and the new vnode
 	if (oldVNode.children && newVNode.children) {
 		const oldChildren = Object.values(oldVNode.children);
@@ -133,6 +149,5 @@ function diffRecursive(oldVNode: VNode, newVNode: VNode, host?: VNode) {
 			}
 		}
 	}
-
 	return newVNode;
 }
