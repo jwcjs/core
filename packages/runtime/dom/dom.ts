@@ -31,8 +31,7 @@ export function createElement(node: VNode | VNode[]): Node {
 		if (key.startsWith("on")) {
 			const eventName = key.slice(2).toLowerCase();
 			el.addEventListener(eventName, value);
-		}
-		if (key === "style") {
+		} else if (key === "style") {
 			for (const styleKey of value) {
 				const styleValue = value[styleKey];
 				(el as HTMLElement).style[styleKey] = styleValue;
