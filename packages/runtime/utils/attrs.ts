@@ -8,9 +8,7 @@ export function removeAttrs(
 		for (const node of vnode) {
 			removeAttrs(node, attrs);
 		}
-		return {
-			vnode,
-		};
+		return vnode;
 	}
 	for (const attr of attrs) {
 		vnode[attr] ? (vnode[attr] = false) : null;
