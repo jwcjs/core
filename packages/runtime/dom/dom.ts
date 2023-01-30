@@ -133,7 +133,6 @@ export function updateDOM(
 
 	// if the node is marked as new, then create a new dom node
 	if (newNode.isNew) {
-		// console.log("create", newNode);
 		newNode.el = createElement(newNode);
 		return newNode;
 	}

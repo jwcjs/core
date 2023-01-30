@@ -134,7 +134,6 @@ function diffRecursive(
 		 */
 		newVNode.isUpdated = true;
 	}
-	// console.log(newVNode, oldVNode);
 	// diff the child nodes of the old vnode and the new vnode
 	if (oldVNode.children && newVNode.children) {
 		const oldChildren = Object.values(oldVNode.children);
