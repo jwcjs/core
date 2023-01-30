@@ -115,7 +115,16 @@ export function updateElement(oldNode: VNode, newNode: VNode) {
  * 4. Update the child nodes of the dom node.
  *
  */
-export function updateDOM(oldNode: VNode | undefined, newNode: VNode) {
+export function updateDOM(
+	oldNode: VNode | undefined,
+	newNode: VNode | VNode[]
+): VNode {
+	if (Array.isArray(newNode)) {
+		for (const child of newNode) {
+			newNode = updateDOM(undefined, child);
+		}
+		return newNode as VNode;
+	}
 	// if the node is marked as deleted, then remove it from the dom tree
 	if (newNode.isDeleted) {
 		newNode.el!.parentNode!.removeChild(newNode.el!);
@@ -124,7 +133,7 @@ export function updateDOM(oldNode: VNode | undefined, newNode: VNode) {
 
 	// if the node is marked as new, then create a new dom node
 	if (newNode.isNew) {
-		console.log("create", newNode);
+		// console.log("create", newNode);
 		newNode.el = createElement(newNode);
 		return newNode;
 	}

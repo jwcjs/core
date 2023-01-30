@@ -91,7 +91,8 @@ function diffRecursive(
 	host?: VNode
 ) {
 	if (!oldVNode) {
-		return markNewVNode(newVNode);
+		newVNode = markNewVNode(newVNode);
+		return newVNode;
 	}
 	// the type of the vnode may be VNode[] ( x.map(() => (<></>)) )
 	if (oldVNode instanceof Array && newVNode instanceof Array) {
