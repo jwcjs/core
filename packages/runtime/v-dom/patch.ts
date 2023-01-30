@@ -3,7 +3,20 @@ import { updateAttributes } from "../dom/attrs";
 
 import { VNode } from "./vnode";
 
-export function patch(host: Node, vnode: VNode, old: VNode, index: number) {
+export function patch(
+	host: Node,
+	vnode: VNode | VNode[],
+	old: VNode | VNode[],
+	index: number
+) {
+	if (Array.isArray(vnode) && Array.isArray(old)) {
+		vnode.forEach((node, index) => {
+			patch(host, node, old[index], index);
+		});
+		return;
+	}
+	vnode = vnode as VNode;
+	old = old as VNode;
 	if (vnode.isUpdated) {
 		// update the attributes of the dom node
 		updateAttributes(vnode.el, vnode.attributes);
@@ -24,10 +37,9 @@ export function patch(host: Node, vnode: VNode, old: VNode, index: number) {
 		for (let index = 0; index < vnode.children.length; index++) {
 			// find the dom node in the host node
 			const child = host.childNodes[index];
-			patch(child, vnode.children[index], old.children[index], index);
+			patch(child, vnode.children[index], old?.children[index], index);
 			continue;
 		}
 	}
-
 	return;
 }
