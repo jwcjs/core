@@ -14,7 +14,7 @@ importers:
       husky: ^8.0.2
       lint-staged: ^13.1.0
       pnpm: ^7.18.2
-      prettier: ^2.8.1
+      prettier: ^3.0.0
       rimraf: ^4.0.0
       tslib: ^2.4.1
       typescript: ^4.9.4
@@ -25,11 +25,11 @@ importers:
       '@wibus/bump-monorepo': 1.0.0-alpha.2
       eslint: 8.29.0
       eslint-config-prettier: 8.5.0_eslint@8.29.0
-      eslint-plugin-prettier: 4.2.1_5dgjrgoi64tgrv3zzn3walur3u
+      eslint-plugin-prettier: 4.2.1_evgbx6qiymec76lwxpwgxjqesy
       husky: 8.0.2
       lint-staged: 13.1.0
       pnpm: 7.18.2
-      prettier: 2.8.1
+      prettier: 3.0.0
       rimraf: 4.0.4
       tslib: 2.4.1
       typescript: 4.9.4
@@ -1459,7 +1459,7 @@ packages:
       eslint: 8.29.0
     dev: true
 
-  /eslint-plugin-prettier/4.2.1_5dgjrgoi64tgrv3zzn3walur3u:
+  /eslint-plugin-prettier/4.2.1_evgbx6qiymec76lwxpwgxjqesy:
     resolution: {integrity: sha512-f/0rXLXUt0oFYs8ra4w49wYZBG5GKZpAYsJSm6rnYL5uVDjd+zowwMwVZHnAjf4edNrKpCDYfXDgmRE/Ak7QyQ==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
@@ -1472,7 +1472,7 @@ packages:
     dependencies:
       eslint: 8.29.0
       eslint-config-prettier: 8.5.0_eslint@8.29.0
-      prettier: 2.8.1
+      prettier: 3.0.0
       prettier-linter-helpers: 1.0.0
     dev: true
 
@@ -2633,9 +2633,9 @@ packages:
       fast-diff: 1.2.0
     dev: true
 
-  /prettier/2.8.1:
-    resolution: {integrity: sha512-lqGoSJBQNJidqCHE80vqZJHWHRFoNYsSpP9AjFhlhi9ODCJA541svILes/+/1GM3VaL/abZi7cpFzOpdR9UPKg==}
-    engines: {node: '>=10.13.0'}
+  /prettier/3.0.0:
+    resolution: {integrity: sha512-zBf5eHpwHOGPC47h0zrPyNn+eAEIdEzfywMoYn2XPi0P44Zp0tSq64rq0xAREh4auw2cJZHo9QUob+NqCQky4g==}
+    engines: {node: '>=14'}
     hasBin: true
     dev: true
 
