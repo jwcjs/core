@@ -39,7 +39,7 @@
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^15.0.1",
     "esbuild": "^0.17.0",
-    "rollup": "^3.7.4",
+    "rollup": "^4.0.0",
     "rollup-plugin-esbuild": "^5.0.0",
     "vite": "^4.0.1",
     "@jwcjs/reactively": "workspace:^1.0.0",
