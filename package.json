@@ -13,8 +13,8 @@
   },
   "devDependencies": {
     "@types/node": "^18.11.17",
-    "@typescript-eslint/eslint-plugin": "^5.46.1",
-    "@typescript-eslint/parser": "^5.46.1",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
     "@wibus/bump-monorepo": "1.0.0-alpha.2",
     "eslint": "^8.29.0",
     "eslint-config-prettier": "^8.5.0",
