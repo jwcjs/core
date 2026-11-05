@@ -12,7 +12,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "vite": "^4.0.1",
+    "vite": "^6.0.0",
     "jwcjs": "workspace:*"
   }
 }
